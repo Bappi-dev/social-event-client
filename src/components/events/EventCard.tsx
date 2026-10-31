@@ -33,7 +33,7 @@ export default function EventCard({ event }: { event: EventCardProps }) {
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
 
         {/* Date chip */}
-        <div className="absolute bottom-3 left-3 flex items-center gap-1.5 rounded-md bg-black/55 px-2 py-1 text-[11px] font-medium text-white backdrop-blur">
+        <div className="absolute bottom-3 left-3 flex items-center gap-1.5  rounded-md bg-black/55 px-2 py-1 text-[11px] font-medium text-white backdrop-blur">
           <Calendar className="size-3 text-teal-300" />
           {event.date}
         </div>

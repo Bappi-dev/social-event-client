@@ -2,7 +2,7 @@
 const CreateEevent = () => {
     return (
         <div>
-            
+           dafddafd 
         </div>
     );
 };

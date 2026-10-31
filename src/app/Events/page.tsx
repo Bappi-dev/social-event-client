@@ -111,7 +111,7 @@ export default function CreateEventPage() {
             
             {/* Event Type Dropdown */}
             <div>
-              <label className="text-xs font-bold text-slate-300 flex items-center gap-1">
+              <label className="text-xs font-bold  text-slate-300 flex items-center gap-1">
                 Event Type <span className="text-red-400">*</span>
               </label>
               <div className="relative mt-1.5">

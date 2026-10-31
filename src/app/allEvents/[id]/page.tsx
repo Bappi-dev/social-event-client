@@ -1,12 +1,24 @@
 import React from "react";
 import Image from "next/image";
-import { Calendar, MapPin, Share2, HeartHandshake, ShieldCheck, Mail } from "lucide-react";
+import {
+  Calendar,
+  MapPin,
+  Share2,
+  HeartHandshake,
+  ShieldCheck,
+  Mail,
+  ArrowLeft,
+  PencilSparkles,
+  TrashOff,
+  Trash,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { notFound } from "next/navigation";
+import Link from "next/link";
+import { EditEvent } from "@/components/sheard/EditEvents";
 
-
-async  function getEventDetails(id: string) {
+async function getEventDetails(id: string) {
   try {
     const res = await fetch(`http://localhost:5000/events/${id}`, {
       cache: "no-store",
@@ -32,14 +44,22 @@ export default async function EventDetailsPage({
   return (
     <div className="min-h-screen bg-slate-50 py-10">
       <div className="container mx-auto max-w-5xl px-4">
-         <div>
-          h
-         </div>
-
+        <div className="flex justify-between items-center mb-5">
+          <Link href={"/allEvents"}>
+            <p className="flex items-center gap-1 text-xl text-gray-400">
+              <ArrowLeft size={15} /> Back to Events
+            </p>
+          </Link>
+          <div className="lg:flex gap-2">
+            <EditEvent event={event}/>
+            <Button variant={"destructive"}>
+              <Trash /> Delete
+            </Button>
+          </div>
+        </div>
 
         {/* Main Card Wrapper */}
         <div className="overflow-hidden rounded-3xl bg-white shadow-xl border border-slate-100">
-          
           {/* 1. Hero Banner Section */}
           <div className="relative h-72 sm:h-96 w-full bg-slate-950">
             <Image
@@ -63,7 +83,7 @@ export default async function EventDetailsPage({
               <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight">
                 {event.title}
               </h1>
-              
+
               <div className="flex flex-wrap items-center gap-4 text-sm text-slate-200">
                 <div className="flex items-center gap-1.5 bg-black/40 backdrop-blur-md px-3 py-1 rounded-lg">
                   <MapPin className="size-4 text-teal-400" />
@@ -84,13 +104,21 @@ export default async function EventDetailsPage({
                 <HeartHandshake className="size-6" />
               </div>
               <div>
-                <h3 className="font-bold text-slate-900">0 Volunteers Joined</h3>
-                <p className="text-xs text-slate-500">Sign up to join hands for this drive</p>
+                <h3 className="font-bold text-slate-900">
+                  0 Volunteers Joined
+                </h3>
+                <p className="text-xs text-slate-500">
+                  Sign up to join hands for this drive
+                </p>
               </div>
             </div>
 
             <div className="flex items-center gap-3 w-full sm:w-auto justify-end">
-              <Button variant="outline" size="icon" className="rounded-xl size-11">
+              <Button
+                variant="outline"
+                size="icon"
+                className="rounded-xl size-11"
+              >
                 <Share2 className="size-4 text-slate-600" />
               </Button>
               <Button className="rounded-xl bg-teal-600 hover:bg-teal-700 text-white px-6 h-11 font-semibold shadow-lg shadow-teal-600/20">
@@ -101,12 +129,13 @@ export default async function EventDetailsPage({
 
           {/* 3. Content & Organizer Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 p-6 sm:p-8">
-            
             {/* Left: About & Guidelines */}
             <div className="lg:col-span-2 space-y-8">
               {/* About Section */}
               <div className="space-y-3">
-                <h2 className="text-xl font-bold text-slate-900">About this Social Initiative</h2>
+                <h2 className="text-xl font-bold text-slate-900">
+                  About this Social Initiative
+                </h2>
                 <p className="text-slate-600 leading-relaxed text-sm sm:text-base">
                   {event.description}
                 </p>
@@ -120,15 +149,24 @@ export default async function EventDetailsPage({
                 <ul className="space-y-3 text-sm text-slate-600">
                   <li className="flex items-start gap-2.5">
                     <span className="size-2 rounded-full bg-teal-600 mt-1.5 shrink-0" />
-                    <span>Please arrive 15 minutes before the scheduled time at the designated location.</span>
+                    <span>
+                      Please arrive 15 minutes before the scheduled time at the
+                      designated location.
+                    </span>
                   </li>
                   <li className="flex items-start gap-2.5">
                     <span className="size-2 rounded-full bg-teal-600 mt-1.5 shrink-0" />
-                    <span>Wear comfortable clothing suitable for physical social work and distribution.</span>
+                    <span>
+                      Wear comfortable clothing suitable for physical social
+                      work and distribution.
+                    </span>
                   </li>
                   <li className="flex items-start gap-2.5">
                     <span className="size-2 rounded-full bg-teal-600 mt-1.5 shrink-0" />
-                    <span>Bring any pre-coordinated relief packages or distribution items if requested.</span>
+                    <span>
+                      Bring any pre-coordinated relief packages or distribution
+                      items if requested.
+                    </span>
                   </li>
                 </ul>
               </div>
@@ -140,7 +178,7 @@ export default async function EventDetailsPage({
                 <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">
                   Initiative Organizer
                 </h4>
-                
+
                 <div className="flex items-center gap-3">
                   <Avatar className="size-12 border">
                     <AvatarImage src={event.organizerImage || ""} />
@@ -165,9 +203,7 @@ export default async function EventDetailsPage({
                 </div>
               </div>
             </div>
-
           </div>
-
         </div>
       </div>
     </div>
