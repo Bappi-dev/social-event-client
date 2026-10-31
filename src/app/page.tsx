@@ -1,3 +1,4 @@
+import GallerySection from "@/components/sheard/GallerySection";
 import Banner from "../components/sheard/Banner";
 import WhyChooseUs from "../components/sheard/WhyChooseUs";
 
@@ -6,6 +7,7 @@ export default function Home() {
     <div>
       <Banner />
       <WhyChooseUs />
+      <GallerySection />
     </div>
   );
 }
