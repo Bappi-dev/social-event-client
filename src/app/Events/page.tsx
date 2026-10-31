@@ -6,7 +6,6 @@ import {
   Sparkles,
   Type,
   Tag,
-  Calendar,
   MapPin,
   Image as ImageIcon,
   Send,
