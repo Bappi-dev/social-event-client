@@ -1,7 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { Calendar, CheckCircle, CircleUserRound, LogOut, Mail, PlusCircle, Settings, SunDim } from "lucide-react";
+import {
+  Calendar,
+  CheckCircle,
+  CircleUserRound,
+  LogOut,
+  Mail,
+  PlusCircle,
+  Settings,
+  SunDim,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -24,9 +33,9 @@ export default function Navbar() {
   const handleSignout = () => {
     authClient.signOut();
     toast.add({
-      description: 'SignOut Successfully!!',
-      type:'success'
-    })
+      description: "SignOut Successfully!!",
+      type: "success",
+    });
   };
 
   return (
@@ -66,9 +75,11 @@ export default function Navbar() {
         </Link>
 
         {/* Navigation / Auth Section */}
-         
+
         <div className="flex items-center gap-6">
-          <p><SunDim className="text-white" size={20} /></p>
+          <div className="cursor-pointer">
+            <SunDim className="text-white" size={20} />
+          </div>
           {user ? (
             <Popover>
               <PopoverTrigger
@@ -85,18 +96,54 @@ export default function Navbar() {
               <PopoverContent>
                 <PopoverHeader>
                   <PopoverTitle className="border text-2xl p-2 rounded-2xl">
-                    <p className="text-md flex items-center gap-1"><CircleUserRound className="text-cyan-300" size={15}/> {user?.name}</p>
-                    <p className="text-sm flex items-center gap-1"> <Mail className="text-red-300" size={10} /> {user?.email}</p>
+                    <p className="text-md flex items-center gap-1">
+                      <CircleUserRound className="text-cyan-300" size={15} />{" "}
+                      {user?.name}
+                    </p>
+                    <p className="text-sm flex items-center gap-1">
+                      {" "}
+                      <Mail className="text-red-300" size={10} /> {user?.email}
+                    </p>
                   </PopoverTitle>
                   <PopoverDescription>
-                    <div className="text-md border-b border-t mb-4">
-                     <Link href={'/Events'}> <p className="font-bold  hover:text-gray-400 rounded flex items-center"> <PlusCircle className="h-4 w-4 text-cyan-400"  size={10}/> Create Event </p></Link>
-                     <Link href={'/Events'}> <p className="font-bold  hover:text-gray-400 rounded flex items-center"> <Settings className="h-4 w-4 text-red-400" size={10}/> Manage Event </p></Link>
-                     <Link href={'/Events'}> <p className="font-bold  hover:text-gray-400 rounded flex items-center"> <CheckCircle className="h-4 w-4 text-cyan-400" size={10}/> Joined Event </p></Link>
+                    <div className="text-xl border-b border-t mb-4">
+                      <Link href={"/Events"}>
+                        {" "}
+                        <p className="fo gap-2nt-bold  hover:text-gray-400 rounded flex items-center gap-2">
+                          {" "}
+                          <PlusCircle
+                            className="h-4 w-4 text-cyan-400"
+                            size={10}
+                          />{" "}
+                          Create Event{" "}
+                        </p>
+                      </Link>
+                      <Link href={"/Events"}>
+                        {" "}
+                        <p className="font-bold  hover:text-gray-400 rounded flex items-center gap-2">
+                          {" "}
+                          <Settings
+                            className="h-4 w-4 text-red-400"
+                            size={10}
+                          />{" "}
+                          Manage Event{" "}
+                        </p>
+                      </Link>
+                      <Link href={"/Events"}>
+                        {" "}
+                        <p className="font-bold  hover:text-gray-400 rounded flex items-center gap-2">
+                          {" "}
+                          <CheckCircle
+                            className="h-4 w-4 text-cyan-400"
+                            size={10}
+                          />{" "}
+                          Joined Event{" "}
+                        </p>
+                      </Link>
                     </div>
 
-                    <Button  onClick={handleSignout} variant={"destructive"}>
-                    <LogOut />  Signout
+                    <Button onClick={handleSignout} variant={"destructive"}>
+                      <LogOut /> Signout
                     </Button>
                   </PopoverDescription>
                 </PopoverHeader>

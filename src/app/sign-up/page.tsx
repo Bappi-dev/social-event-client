@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/card";
 import { authClient } from "@/lib/auth-client";
 import { toast } from "@/components/ui/toast";
+import { FcGoogle } from "react-icons/fc";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -66,7 +67,7 @@ export default function RegisterPage() {
           {/* Logo Brand Header */}
           <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-slate-950 border border-slate-800 ring-2 ring-cyan-500/50 shadow-[0_0_15px_rgba(6,182,212,0.35)]">
             <svg
-              className="h-7 w-7 text-cyan-400 animate-pulse"
+              className="h-7 w-7 rounded-xl border border-teal-500/60 bg-slate-950 py-3 pl-10 pr-4 text-xs text-white placeholder:text-slate-600 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500 transition-all"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -183,6 +184,12 @@ export default function RegisterPage() {
           </form>
 
           {/* Redirect Link to Login */}
+          <div className="mt-4">
+            <Button className=" w-full rounded-xl border-gray-200 bg-white font-semibold text-gray-700 transition hover:border-emerald-300 hover:bg-emerald-50">
+              <FcGoogle className="text-xl" />
+              login with Google
+            </Button>
+          </div>
           <div className="mt-6 border-t border-slate-800/80 pt-4 text-center">
             <p className="text-xs text-slate-400">
               Already have an account?{" "}
@@ -194,6 +201,7 @@ export default function RegisterPage() {
               </Link>
             </p>
           </div>
+          
         </CardContent>
       </Card>
     </div>

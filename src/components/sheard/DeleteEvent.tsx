@@ -1,3 +1,4 @@
+'use client'
 import {
   AlertDialog,
   AlertDialogAction,
@@ -8,16 +9,33 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
   AlertDialogTrigger,
-} from "@/components/ui/alert-dialog"
-import { Button } from "@/components/ui/button"
-import { Trash } from "lucide-react"
+} from "@/components/ui/alert-dialog";
+import { Button } from "@/components/ui/button";
+import { Trash } from "lucide-react";
+import { redirect } from "next/navigation";
+import { toast } from "../ui/toast";
 
-export function DeleteEvent() {
+export function DeleteEvent({ id }: { id: string }) {
+  const handleDeleteEvent = async () => {
+    const res = await fetch(`http://localhost:5000/events/${id}`, {
+      method: "DELETE",
+    });
+    await res.json();
+    toast.add({
+      description:'Delete successfully!',
+      type: 'success'
+    })
+    redirect('/allEvents')
+  };
   return (
     <AlertDialog>
-      <AlertDialogTrigger render={<Button variant={"destructive"}>
-              <Trash /> Delete
-            </Button>} />
+      <AlertDialogTrigger
+        render={
+          <Button variant={"destructive"}>
+            <Trash /> Delete
+          </Button>
+        }
+      />
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
@@ -28,9 +46,9 @@ export function DeleteEvent() {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction>Continue</AlertDialogAction>
+          <AlertDialogAction onClick={handleDeleteEvent}>Continue</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
-  )
+  );
 }

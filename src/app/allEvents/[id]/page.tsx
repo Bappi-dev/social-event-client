@@ -51,7 +51,7 @@ export default async function EventDetailsPage({
           </Link>
           <div className="lg:flex gap-2">
             <EditEvent event={event} />
-            <DeleteEvent />
+            <DeleteEvent id={id}/>
           </div>
         </div>
 
