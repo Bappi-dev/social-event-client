@@ -1,4 +1,4 @@
-import React from "react";
+
 import Image from "next/image";
 import {
   Calendar,
@@ -8,15 +8,14 @@ import {
   ShieldCheck,
   Mail,
   ArrowLeft,
-  PencilSparkles,
-  TrashOff,
-  Trash,
+ 
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { EditEvent } from "@/components/sheard/EditEvents";
+import { DeleteEvent } from "@/components/sheard/DeleteEvent";
 
 async function getEventDetails(id: string) {
   try {
@@ -51,10 +50,8 @@ export default async function EventDetailsPage({
             </p>
           </Link>
           <div className="lg:flex gap-2">
-            <EditEvent event={event}/>
-            <Button variant={"destructive"}>
-              <Trash /> Delete
-            </Button>
+            <EditEvent event={event} />
+            <DeleteEvent />
           </div>
         </div>
 

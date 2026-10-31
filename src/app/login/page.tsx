@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/card";
 import { authClient } from "@/lib/auth-client";
 import { redirect } from "next/navigation";
+import { toast } from "@/components/ui/toast";
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({
@@ -38,6 +39,10 @@ export default function LoginPage() {
     });
     if (data) {
       console.log(data);
+      toast.add({
+        description:'login successfully!!',
+        type:'success'
+      })
       redirect('/allEvents')
     }
     if (error) {

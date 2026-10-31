@@ -4,6 +4,8 @@ import "./globals.css";
 
 import Footer from "@/components/sheard/Footer";
 import Navbar from "@/components/sheard/Navbar";
+import { Toaster } from "@/components/ui/toast";
+
 
 
 const geistSans = Geist({
@@ -30,6 +32,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col">
            <Navbar />
         <main>{children}</main>
+        <Toaster />
         <Footer />
       </body>
     </html>

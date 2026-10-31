@@ -14,6 +14,7 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import { authClient } from "@/lib/auth-client";
+import { toast } from "@/components/ui/toast";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -29,18 +30,26 @@ export default function RegisterPage() {
     e.preventDefault();
 
     const formData = new FormData(e.target as HTMLFormElement);
-    const eventData = Object.fromEntries(formData.entries()) as {name: string, email: string, ImageUrl: string, password:string};
+    const eventData = Object.fromEntries(formData.entries()) as {
+      name: string;
+      email: string;
+      ImageUrl: string;
+      password: string;
+    };
 
-    const {data , error} = await authClient.signUp.email({
-            ...eventData 
-    })
-    if(data) {
-         console.log(data);
+    const { data, error } = await authClient.signUp.email({
+      ...eventData,
+    });
+    if (data) {
+      console.log(data);
+      toast.add({
+        description: "SignUp successfully!!",
+        type: "success",
+      });
     }
-    if(error) {
-        console.log(error)
+    if (error) {
+      console.log(error);
     }
-
 
     setError("");
     router.push("/");

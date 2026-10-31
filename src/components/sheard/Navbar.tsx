@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRightToLine, Calendar, CheckCircle, CircleUserRound, LogOut, Mail, PlusCircle, Settings, SunDim } from "lucide-react";
+import { Calendar, CheckCircle, CircleUserRound, LogOut, Mail, PlusCircle, Settings, SunDim } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -14,7 +14,8 @@ import {
   PopoverTitle,
   PopoverTrigger,
 } from "../ui/popover";
-import { DropdownMenuItem } from "../ui/dropdown-menu";
+
+import { toast } from "../ui/toast";
 
 export default function Navbar() {
   const { data: session } = authClient.useSession();
@@ -22,6 +23,10 @@ export default function Navbar() {
 
   const handleSignout = () => {
     authClient.signOut();
+    toast.add({
+      description: 'SignOut Successfully!!',
+      type:'success'
+    })
   };
 
   return (
@@ -90,7 +95,7 @@ export default function Navbar() {
                      <Link href={'/Events'}> <p className="font-bold  hover:text-gray-400 rounded flex items-center"> <CheckCircle className="h-4 w-4 text-cyan-400" size={10}/> Joined Event </p></Link>
                     </div>
 
-                    <Button onClick={handleSignout} variant={"destructive"}>
+                    <Button  onClick={handleSignout} variant={"destructive"}>
                     <LogOut />  Signout
                     </Button>
                   </PopoverDescription>

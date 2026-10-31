@@ -63,7 +63,7 @@ export default function EventCard({ event }: { event: EventCardProps }) {
       {/* Footer */}
       <CardFooter className="px-4 pb-4 pt-2">
         <Link href={`/allEvents/${_id}`}>
-          <Button className="w-full gap-2 bg-teal-600 text-white hover:bg-teal-700">
+          <Button className="w-full gap-2 cursor-pointer bg-teal-600 text-white hover:bg-teal-700">
             View Event <ArrowRight className="size-4" />
           </Button>
         </Link>
