@@ -6,26 +6,25 @@ import {
   
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { authClient } from "@/lib/auth-client";
+import { Popover, PopoverContent, PopoverDescription, PopoverHeader, PopoverTitle, PopoverTrigger } from "../ui/popover";
 
 
 
 export default function Navbar() {
-  //
-
+  const { data: session } = authClient.useSession();
+  const user = session?.user;
   
-
+  const handleSignout = () => {
+    authClient.signOut()
+  }
+  
   return (
-    <nav className="sticky border-b border-b-cyan-400  top-0 z-50 border-b border-slate-800 bg-slate-900/80 backdrop-blur-md ">
+    <nav className="sticky top-0 z-50 border-b border-cyan-400 bg-slate-900/80 backdrop-blur-md">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
+        
         {/* App Logo */}
         <Link href="/" className="flex items-center gap-3 group">
           <div className="relative flex h-10 w-10 items-center justify-center rounded-xl bg-slate-900 ring-2 ring-cyan-500/50 shadow-[0_0_15px_rgba(6,182,212,0.35)] transition-transform group-hover:scale-105">
@@ -46,26 +45,53 @@ export default function Navbar() {
           </div>
           <span className="tracking-wide text-white">
             <p className="text-xl">
-              {" "}
-              Good<span className="text-cyan-400">Gather</span>{" "}
+              Good<span className="text-cyan-400">Gather</span>
             </p>
           </span>
         </Link>
+
+        {/* Upcoming Events Link */}
         <Link
           href="/allEvents"
           className="text-sm font-medium text-slate-300 hover:text-orange-400 transition-colors flex items-center gap-1.5"
         >
           <Calendar className="h-4 w-4" /> Upcoming Events
         </Link>
-        {/* Navigation Links */}
-        <div className=" items-center gap-6">
-          {/* Conditional Auth Section */}
 
-          <Button
-            className="bg-cyan-500 px-4  text-slate-950 font-semibold hover:bg-cyan-200"
-          >
-            <Link href="/login">Login</Link>
-          </Button>
+        {/* Navigation / Auth Section */}
+        <div className="flex items-center gap-6">
+          {user ? 
+             <Popover>
+            <PopoverTrigger
+              render={
+                <Avatar>
+                  <AvatarImage
+                    referrerPolicy="no-referrer"
+                    src={user?.image as string}
+                  />
+                  <AvatarFallback>{user?.name.charAt(0)}</AvatarFallback>
+                </Avatar>
+              }
+            ></PopoverTrigger>
+            <PopoverContent>
+              <PopoverHeader>
+                <PopoverTitle>{user?.name}</PopoverTitle>
+                <PopoverDescription>
+                  <p>{user?.email}</p>
+                  <Button onClick={handleSignout} variant={"destructive"}>
+                    Signout
+                  </Button>
+                
+                </PopoverDescription>
+              </PopoverHeader>
+            </PopoverContent>
+          </Popover>
+            
+           : (
+            <Button  className="bg-cyan-500 px-4 text-slate-950 font-semibold hover:bg-cyan-200">
+              <Link href="/login">Login</Link>
+            </Button>
+          )}
         </div>
       </div>
     </nav>

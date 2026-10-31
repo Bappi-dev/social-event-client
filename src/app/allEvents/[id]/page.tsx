@@ -32,6 +32,11 @@ export default async function EventDetailsPage({
   return (
     <div className="min-h-screen bg-slate-50 py-10">
       <div className="container mx-auto max-w-5xl px-4">
+         <div>
+          h
+         </div>
+
+
         {/* Main Card Wrapper */}
         <div className="overflow-hidden rounded-3xl bg-white shadow-xl border border-slate-100">
           

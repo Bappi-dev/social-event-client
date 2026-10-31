@@ -14,6 +14,7 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import { authClient } from "@/lib/auth-client";
+import { redirect } from "next/navigation";
 
 export default function LoginPage() {
   const [formData, setFormData] = useState({
@@ -37,6 +38,7 @@ export default function LoginPage() {
     });
     if (data) {
       console.log(data);
+      redirect('/allEvents')
     }
     if (error) {
       console.log(error);
@@ -136,11 +138,9 @@ export default function LoginPage() {
             </Button>
 
             <div>
-              <Button
-                className=" w-full rounded-xl border-gray-200 bg-white font-semibold text-gray-700 transition hover:border-emerald-300 hover:bg-emerald-50"
-              >
+              <Button className=" w-full rounded-xl border-gray-200 bg-white font-semibold text-gray-700 transition hover:border-emerald-300 hover:bg-emerald-50">
                 <FcGoogle className="text-xl" />
-                 login with Google
+                login with Google
               </Button>
             </div>
           </form>
