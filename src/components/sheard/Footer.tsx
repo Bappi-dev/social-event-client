@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Heart, Mail, MapPin, Phone } from "lucide-react";
+import { Heart, Mail, MapPin } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -61,7 +61,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/events"
+                  href="/allEvents"
                   className="hover:text-cyan-400 transition-colors"
                 >
                   Upcoming Events

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { ArrowRight, HeartHandshake, Sparkles, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 export default function Banner() {
   return (
@@ -37,7 +38,6 @@ export default function Banner() {
             {/* Action Buttons */}
             <div className="mt-8 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
               <Button
-                asChild
                 size="lg"
                 className="w-full sm:w-auto bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold px-8 shadow-lg shadow-cyan-500/20"
               >
@@ -46,7 +46,6 @@ export default function Banner() {
                 </Link>
               </Button>
               <Button
-                asChild
                 size="lg"
                 variant="outline"
                 className="w-full sm:w-auto border-slate-800 bg-slate-900/60 text-slate-200 hover:bg-slate-800 hover:text-white backdrop-blur-md"
@@ -88,7 +87,9 @@ export default function Banner() {
             <div className="relative w-full max-w-md rounded-2xl border border-slate-800 bg-slate-900/70 p-6 backdrop-blur-xl shadow-2xl">
               {/* Event Image Banner */}
               <div className="relative h-56 w-full overflow-hidden rounded-xl">
-                <img
+                <Image
+                  width={400}
+                  height={400}
                   src="https://images.unsplash.com/photo-1542810634-71277d95dcbb?w=800"
                   alt="Winter Relief Campaign"
                   className="h-full w-full object-cover"

@@ -1,14 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
 import {
   Calendar,
-  PlusCircle,
-  Settings,
-  CheckCircle,
-  LogOut,
-  User,
+  
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,26 +16,12 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-const logo = [
-  <svg
-    className="h-6 w-6 text-cyan-400 animate-pulse"
-    fill="none"
-    viewBox="0 0 24 24"
-    stroke="currentColor"
-    strokeWidth="2"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M12 3v18m9-9H3m15.364-6.364L6.364 18.364M18.364 17.636L6.364 5.636"
-    />
-  </svg>,
-];
+
 
 export default function Navbar() {
   //
 
-  const handleLogout = () => setUser(null);
+  
 
   return (
     <nav className="sticky border-b border-b-cyan-400  top-0 z-50 border-b border-slate-800 bg-slate-900/80 backdrop-blur-md ">
@@ -71,7 +52,7 @@ export default function Navbar() {
           </span>
         </Link>
         <Link
-          href="/events"
+          href="/allEvents"
           className="text-sm font-medium text-slate-300 hover:text-orange-400 transition-colors flex items-center gap-1.5"
         >
           <Calendar className="h-4 w-4" /> Upcoming Events
@@ -81,7 +62,6 @@ export default function Navbar() {
           {/* Conditional Auth Section */}
 
           <Button
-            asChild
             className="bg-cyan-500 px-4  text-slate-950 font-semibold hover:bg-cyan-200"
           >
             <Link href="/login">Login</Link>
