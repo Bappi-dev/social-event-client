@@ -14,10 +14,11 @@ import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { EditEvent } from "@/components/sheard/EditEvents";
-import { DeleteEvent } from "@/components/sheard/DeleteEvent";
+
 import DetalisCardR from "@/components/sheard/DetalisCardR";
 import JoinCard from "@/components/events/JoinCard";
+import { EditEvent } from "@/components/events/EditEvents";
+import { DeleteEvent } from "@/components/events/DeleteEvent";
 
 async function getEventDetails(id: string) {
         
