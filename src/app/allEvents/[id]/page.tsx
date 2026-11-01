@@ -16,8 +16,10 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { EditEvent } from "@/components/sheard/EditEvents";
 import { DeleteEvent } from "@/components/sheard/DeleteEvent";
+import DetalisCardR from "@/components/sheard/DetalisCardR";
 
 async function getEventDetails(id: string) {
+        
   try {
     const res = await fetch(`http://localhost:5000/events/${id}`, {
       cache: "no-store",
@@ -29,11 +31,7 @@ async function getEventDetails(id: string) {
   }
 }
 
-export default async function EventDetailsPage({
-  params,
-}: {
-  params: Promise<{ id: string }>;
-}) {
+export default async function EventDetailsPage({ params,}: {params: Promise<{ id: string }>;}) {
   const { id } = await params;
   const event = await getEventDetails(id);
   if (!event) {
@@ -170,36 +168,8 @@ export default async function EventDetailsPage({
             </div>
 
             {/* Right: Organizer Card */}
-            <div>
-              <div className="rounded-2xl border border-slate-200/80 p-5 space-y-4 bg-white shadow-sm">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">
-                  Initiative Organizer
-                </h4>
-
-                <div className="flex items-center gap-3">
-                  <Avatar className="size-12 border">
-                    <AvatarImage src={event.organizerImage || ""} />
-                    <AvatarFallback className="bg-teal-100 text-teal-800 font-bold">
-                      {event.organizer ? event.organizer[0] : "O"}
-                    </AvatarFallback>
-                  </Avatar>
-                  <div>
-                    <h5 className="font-bold text-slate-900 text-sm">
-                      {event.organizer || "Mirpur Youth Volunteers"}
-                    </h5>
-                    <p className="text-xs text-slate-500 flex items-center gap-1 mt-0.5">
-                      <Mail className="size-3" />
-                      organizer@goodgather.org
-                    </p>
-                  </div>
-                </div>
-
-                <div className="pt-2 border-t border-slate-100 flex items-center gap-1.5 text-xs font-medium text-teal-600">
-                  <ShieldCheck className="size-4" />
-                  <span>Verified Platform Member</span>
-                </div>
-              </div>
-            </div>
+            
+             <DetalisCardR event={event}/>
           </div>
         </div>
       </div>

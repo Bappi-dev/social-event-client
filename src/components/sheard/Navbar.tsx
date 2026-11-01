@@ -18,9 +18,6 @@ import { authClient } from "@/lib/auth-client";
 import {
   Popover,
   PopoverContent,
-  PopoverDescription,
-  PopoverHeader,
-  PopoverTitle,
   PopoverTrigger,
 } from "../ui/popover";
 

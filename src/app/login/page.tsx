@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { User, Mail, Link as LinkIcon, Lock, AlertCircle } from "lucide-react";
+import { Mail, Link as Lock, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { FcGoogle } from "react-icons/fc";
@@ -14,10 +14,11 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import { authClient } from "@/lib/auth-client";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { toast } from "@/components/ui/toast";
 
 export default function LoginPage() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -40,19 +41,19 @@ export default function LoginPage() {
     if (data) {
       console.log(data);
       toast.add({
-        description:'login successfully!!',
-        type:'success'
-      })
-      redirect('/allEvents')
+        description: "login successfully!!",
+        type: "success",
+      });
+      redirect("/allEvents");
     }
     if (error) {
       console.log(error);
       toast.add({
-        description:'Invalid email or password!!',
-        type:'error'
-      })
+        description: "Invalid email or password!!",
+        type: "error",
+      });
     }
-
+    router.push("/");
     setError("");
   };
 
