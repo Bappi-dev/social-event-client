@@ -47,6 +47,10 @@ export default function LoginPage() {
     }
     if (error) {
       console.log(error);
+      toast.add({
+        description:'Invalid email or password!!',
+        type:'error'
+      })
     }
 
     setError("");

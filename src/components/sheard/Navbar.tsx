@@ -82,71 +82,87 @@ export default function Navbar() {
           </div>
           {user ? (
             <Popover>
-              <PopoverTrigger
-                render={
-                  <Avatar>
+              {/* Trigger Button with Avatar */}
+              <PopoverTrigger>
+                <button className="rounded-full outline-none ring-offset-background transition-transform hover:scale-105 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+                  <Avatar className="h-10 w-10 border border-slate-700/50 shadow-sm">
                     <AvatarImage
                       referrerPolicy="no-referrer"
-                      src={user?.image as string}
+                      src={user?.image || undefined}
+                      alt={user?.name || "User Avatar"}
                     />
-                    <AvatarFallback>{user?.name.charAt(0)}</AvatarFallback>
+                    <AvatarFallback className="bg-teal-600 font-bold text-white uppercase">
+                      {user?.name ? user.name.charAt(0) : "U"}
+                    </AvatarFallback>
                   </Avatar>
-                }
-              ></PopoverTrigger>
-              <PopoverContent>
-                <PopoverHeader>
-                  <PopoverTitle className="border text-2xl p-2 rounded-2xl">
-                    <p className="text-md flex items-center gap-1">
-                      <CircleUserRound className="text-cyan-300" size={15} />{" "}
-                      {user?.name}
-                    </p>
-                    <p className="text-sm flex items-center gap-1">
-                      {" "}
-                      <Mail className="text-red-300" size={10} /> {user?.email}
-                    </p>
-                  </PopoverTitle>
-                  <PopoverDescription>
-                    <div className="text-xl border-b border-t mb-4">
-                      <Link href={"/Events"}>
-                        {" "}
-                        <p className="fo gap-2nt-bold  hover:text-gray-400 rounded flex items-center gap-2">
-                          {" "}
-                          <PlusCircle
-                            className="h-4 w-4 text-cyan-400"
-                            size={10}
-                          />{" "}
-                          Create Event{" "}
-                        </p>
-                      </Link>
-                      <Link href={"/Events"}>
-                        {" "}
-                        <p className="font-bold  hover:text-gray-400 rounded flex items-center gap-2">
-                          {" "}
-                          <Settings
-                            className="h-4 w-4 text-red-400"
-                            size={10}
-                          />{" "}
-                          Manage Event{" "}
-                        </p>
-                      </Link>
-                      <Link href={"/Events"}>
-                        {" "}
-                        <p className="font-bold  hover:text-gray-400 rounded flex items-center gap-2">
-                          {" "}
-                          <CheckCircle
-                            className="h-4 w-4 text-cyan-400"
-                            size={10}
-                          />{" "}
-                          Joined Event{" "}
-                        </p>
-                      </Link>
-                    </div>
+                </button>
+              </PopoverTrigger>
 
-                    <Button onClick={handleSignout} variant={"destructive"}>
-                      <LogOut /> Signout
-                    </Button>
-                  </PopoverDescription>
-                </PopoverHeader>
+              {/* Popover Content */}
+              <PopoverContent
+                align="end"
+                className="w-64 rounded-2xl border border-slate-800 bg-slate-950 p-4 text-slate-100 shadow-2xl backdrop-blur-md"
+              >
+                {/* User Info Header Section */}
+                <div className="flex items-center gap-3 rounded-xl bg-slate-900/80 p-3 border border-slate-800/80">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-teal-500/10 text-teal-400">
+                    <CircleUserRound className="h-6 w-6" />
+                  </div>
+                  <div className="flex flex-col min-w-0">
+                    <p className="truncate text-sm font-bold text-slate-100">
+                      {user?.name || "Anonymous User"}
+                    </p>
+                    <p className="flex items-center gap-1 text-xs text-slate-400 truncate mt-0.5">
+                      <Mail className="h-3 w-3 text-red-400 shrink-0" />
+                      <span className="truncate">
+                        {user?.email || "user@example.com"}
+                      </span>
+                    </p>
+                  </div>
+                </div>
+
+                {/* Divider */}
+                <div className="my-3 h-[1px] bg-slate-800/80" />
+
+                {/* Navigation Links List */}
+                <div className="space-y-1">
+                  <Link
+                    href="/Events"
+                    className="flex items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-semibold text-slate-300 transition-all hover:bg-slate-900 hover:text-teal-400"
+                  >
+                    <PlusCircle className="h-4 w-4 text-teal-400" />
+                    <span>Create Event</span>
+                  </Link>
+
+                  <Link
+                    href="/Events"
+                    className="flex items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-semibold text-slate-300 transition-all hover:bg-slate-900 hover:text-teal-400"
+                  >
+                    <Settings className="h-4 w-4 text-amber-400" />
+                    <span>Manage Event</span>
+                  </Link>
+
+                  <Link
+                    href="/Events"
+                    className="flex items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-semibold text-slate-300 transition-all hover:bg-slate-900 hover:text-teal-400"
+                  >
+                    <CheckCircle className="h-4 w-4 text-emerald-400" />
+                    <span>Joined Event</span>
+                  </Link>
+                </div>
+
+                {/* Divider */}
+                <div className="my-3 h-[1px] bg-slate-800/80" />
+
+                {/* Signout Action */}
+                <Button
+                  onClick={handleSignout}
+                  variant="destructive"
+                  className="w-full justify-center gap-2 rounded-xl bg-red-600/20 text-red-400 hover:bg-red-600 hover:text-white border border-red-500/30 text-xs font-bold h-9 transition-all"
+                >
+                  <LogOut className="h-3.5 w-3.5" />
+                  <span>Sign Out</span>
+                </Button>
               </PopoverContent>
             </Popover>
           ) : (
