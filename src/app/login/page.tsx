@@ -14,11 +14,11 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import { authClient } from "@/lib/auth-client";
-import { redirect, useRouter } from "next/navigation";
+// import { redirect, useRouter } from "next/navigation";
 import { toast } from "@/components/ui/toast";
 
 export default function LoginPage() {
-  const router = useRouter();
+  // const router = useRouter();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -53,7 +53,7 @@ export default function LoginPage() {
         type: "error",
       });
     }
-    router.push("/");
+    // router.push("/");
     setError("");
   };
 

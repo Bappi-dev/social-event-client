@@ -35,7 +35,7 @@ export default function EventCard({ event }: { event: EventCardProps }) {
         {/* Date chip */}
         <div className="absolute bottom-3 left-3 flex items-center gap-1.5  rounded-md bg-black/55 px-2 py-1 text-[11px] font-medium text-white backdrop-blur">
           <Calendar className="size-3 text-teal-300" />
-          {event.date}
+          {event.eventDate}
         </div>
       </div>
 
@@ -72,18 +72,4 @@ export default function EventCard({ event }: { event: EventCardProps }) {
   );
 }
 
-/* ---------- Usage ----------
-<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-  <EventCard
-    id="1"
-    title="Winter Clothes Distribution"
-    category="Donation"
-    date="Sun, Nov 15, 2026"
-    location="Mirpur 10, Dhaka"
-    description="Collecting and distributing warm clothes, jackets, sweaters, and shawls to underprivileged families."
-    organizer="Mirpur Youth Volunteers"
-    image="/images/winter.jpg"
-    href="/events/1"
-  />
-</div>
-*/
+

@@ -17,6 +17,7 @@ import Link from "next/link";
 import { EditEvent } from "@/components/sheard/EditEvents";
 import { DeleteEvent } from "@/components/sheard/DeleteEvent";
 import DetalisCardR from "@/components/sheard/DetalisCardR";
+import JoinCard from "@/components/events/JoinCard";
 
 async function getEventDetails(id: string) {
         
@@ -93,35 +94,8 @@ export default async function EventDetailsPage({ params,}: {params: Promise<{ id
           </div>
 
           {/* 2. Action Bar (Volunteers & Join Button) */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-6 border-b border-slate-100 bg-white">
-            <div className="flex items-center gap-3 w-full sm:w-auto">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-teal-50 text-teal-600">
-                <HeartHandshake className="size-6" />
-              </div>
-              <div>
-                <h3 className="font-bold text-slate-900">
-                  0 Volunteers Joined
-                </h3>
-                <p className="text-xs text-slate-500">
-                  Sign up to join hands for this drive
-                </p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3 w-full sm:w-auto justify-end">
-              <Button
-                variant="outline"
-                size="icon"
-                className="rounded-xl size-11"
-              >
-                <Share2 className="size-4 text-slate-600" />
-              </Button>
-              <Button className="rounded-xl bg-teal-600 hover:bg-teal-700 text-white px-6 h-11 font-semibold shadow-lg shadow-teal-600/20">
-                Join Event
-              </Button>
-            </div>
-          </div>
-
+             <JoinCard event={event}/>
+              
           {/* 3. Content & Organizer Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 p-6 sm:p-8">
             {/* Left: About & Guidelines */}

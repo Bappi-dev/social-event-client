@@ -41,7 +41,7 @@ export default function Banner() {
                 size="lg"
                 className="w-full sm:w-auto bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold px-8 shadow-lg shadow-cyan-500/20"
               >
-                <Link href="/events" className="flex items-center gap-2">
+                <Link href="/allEvents" className="flex items-center gap-2">
                   Explore Events <ArrowRight className="h-4 w-4" />
                 </Link>
               </Button>
@@ -51,7 +51,7 @@ export default function Banner() {
                 className="w-full sm:w-auto border-slate-800 bg-slate-900/60 text-slate-200 hover:bg-slate-800 hover:text-white backdrop-blur-md"
               >
                 <Link
-                  href="/events/create"
+                  href="/Events"
                   className="flex  items-center gap-2"
                 >
                   Create Event

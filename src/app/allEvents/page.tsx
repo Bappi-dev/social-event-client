@@ -1,24 +1,21 @@
 "use client";
-
-
 import React, { useEffect, useState } from "react";
-
 import { Spinner } from "@/components/ui/spinner";
 import EventCard from "@/components/events/EventCard";
-
 
 const AllEvents = () => {
   const [events, setEvents] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [sortBy, setSortBy] = useState("latest"); 
+  const [sortBy, setSortBy] = useState("latest");
 
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const res = await fetch("http://localhost:5000/events", {
+        const res = "http://localhost:5000/events";
+        const response = await fetch(res, {
           cache: "no-store",
         });
-        const data = await res.json();
+        const data = await response.json();
         setEvents(data);
       } catch (error) {
         console.error("Failed to fetch events:", error);
@@ -30,11 +27,27 @@ const AllEvents = () => {
     fetchEvents();
   }, []);
 
-  const sortedEvents = [...events].sort((a, b) => {
+
+  const currentDate = new Date();
+  currentDate.setHours(0, 0, 0, 0);
+
+  const upcomingEvents = events.filter((event) => {
+    const eventDate = new Date(event.eventDate || event.date);
+    return eventDate >= currentDate;
+  });
+
+
+  const sortedEvents = [...upcomingEvents].sort((a, b) => {
     if (sortBy === "latest") {
-      return new Date(b.eventDate || 0).getTime() - new Date(a.eventDate || 0).getTime();
+      return (
+        new Date(b.eventDate || 0).getTime() -
+        new Date(a.eventDate || 0).getTime()
+      );
     } else if (sortBy === "oldest") {
-      return new Date(a.eventDate || 0).getTime() - new Date(b.eventDate || 0).getTime();
+      return (
+        new Date(a.eventDate || 0).getTime() -
+        new Date(b.eventDate || 0).getTime()
+      );
     } else if (sortBy === "title-asc") {
       return a.title.localeCompare(b.title);
     } else if (sortBy === "title-desc") {
@@ -58,7 +71,9 @@ const AllEvents = () => {
 
         {/* Sorting Dropdown */}
         <div className="flex items-center gap-2 w-full md:w-auto">
-          <span className="text-sm font-medium text-muted-foreground whitespace-nowrap">Sort By:</span>
+          <span className="text-sm font-medium text-muted-foreground whitespace-nowrap">
+            Sort By:
+          </span>
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
@@ -73,7 +88,9 @@ const AllEvents = () => {
       </div>
 
       {sortedEvents.length === 0 ? (
-        <p className="text-center text-muted-foreground py-10">No events found.</p>
+        <p className="text-center text-muted-foreground py-10">
+          No upcoming events found.
+        </p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {sortedEvents.map((event) => (
