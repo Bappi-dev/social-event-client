@@ -1,57 +1,40 @@
-
+import { DeleteEvent } from "@/components/events/DeleteEvent";
+import { EditEvent } from "@/components/events/EditEvents";
+import JoinCard from "@/components/events/JoinCard";
+import DetalisCardR from "@/components/sheard/DetalisCardR";
+import { ArrowLeft, Calendar, MapPin } from "lucide-react";
 import Image from "next/image";
-import {
-  Calendar,
-  MapPin,
-  Share2,
-  HeartHandshake,
-  ShieldCheck,
-  Mail,
-  ArrowLeft,
- 
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { notFound } from "next/navigation";
 import Link from "next/link";
 
-import DetalisCardR from "@/components/sheard/DetalisCardR";
-import JoinCard from "@/components/events/JoinCard";
-import { EditEvent } from "@/components/events/EditEvents";
-import { DeleteEvent } from "@/components/events/DeleteEvent";
-
-async function getEventDetails(id: string) {
-        
-  try {
-    const res = await fetch(`http://localhost:5000/events/${id}`, {
-      cache: "no-store",
-    });
-    if (!res.ok) return null;
-    return await res.json();
-  } catch (error) {
-    return null;
-  }
+interface IEventDetailsProps {
+  params: Promise<{ id: string }>; 
 }
 
-export default async function EventDetailsPage({ params,}: {params: Promise<{ id: string }>;}) {
-  const { id } = await params;
-  const event = await getEventDetails(id);
-  if (!event) {
-    notFound();
+const EventDetailsPage = async ({ params }: IEventDetailsProps) => {
+  const { id } = await params; 
+
+  const res = await fetch(`http://localhost:5000/allevents/${id}`, {
+    cache: "no-store",
+  });
+  
+  if (!res.ok) {
+    return <div className="text-center py-20 text-red-500 font-bold">Event not found!</div>;
   }
+
+  const event = await res.json(); 
 
   return (
     <div className="min-h-screen bg-slate-50 py-10">
       <div className="container mx-auto max-w-5xl px-4">
         <div className="flex justify-between items-center mb-5">
           <Link href={"/allEvents"}>
-            <p className="flex items-center gap-1 text-xl text-gray-400">
+            <p className="flex items-center gap-1 text-xl text-gray-400 hover:text-gray-600">
               <ArrowLeft size={15} /> Back to Events
             </p>
           </Link>
           <div className="lg:flex gap-2">
             <EditEvent event={event} />
-            <DeleteEvent id={id}/>
+            <DeleteEvent id={id} />
           </div>
         </div>
 
@@ -95,8 +78,8 @@ export default async function EventDetailsPage({ params,}: {params: Promise<{ id
           </div>
 
           {/* 2. Action Bar (Volunteers & Join Button) */}
-             <JoinCard event={event}/>
-              
+          <JoinCard event={event} />
+
           {/* 3. Content & Organizer Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 p-6 sm:p-8">
             {/* Left: About & Guidelines */}
@@ -120,8 +103,8 @@ export default async function EventDetailsPage({ params,}: {params: Promise<{ id
                   <li className="flex items-start gap-2.5">
                     <span className="size-2 rounded-full bg-teal-600 mt-1.5 shrink-0" />
                     <span>
-                      Please arrive 15 minutes before the scheduled time at the
-                      designated location.
+                      Please arrive 15 minutes before the scheduled time at
+                      the designated location.
                     </span>
                   </li>
                   <li className="flex items-start gap-2.5">
@@ -134,8 +117,8 @@ export default async function EventDetailsPage({ params,}: {params: Promise<{ id
                   <li className="flex items-start gap-2.5">
                     <span className="size-2 rounded-full bg-teal-600 mt-1.5 shrink-0" />
                     <span>
-                      Bring any pre-coordinated relief packages or distribution
-                      items if requested.
+                      Bring any pre-coordinated relief packages or
+                      distribution items if requested.
                     </span>
                   </li>
                 </ul>
@@ -143,11 +126,12 @@ export default async function EventDetailsPage({ params,}: {params: Promise<{ id
             </div>
 
             {/* Right: Organizer Card */}
-            
-             <DetalisCardR event={event}/>
+            <DetalisCardR event={event} />
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
+
+export default EventDetailsPage;

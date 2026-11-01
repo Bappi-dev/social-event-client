@@ -1,9 +1,11 @@
 import React from "react";
 import { Card, CardContent, CardFooter } from "../ui/card";
 import Image from "next/image";
-import { ArrowRight, Calendar, CalendarDays, MapPin } from "lucide-react";
+import { ArrowRight, Calendar, CalendarDays, MapPin, Trash } from "lucide-react";
 import Link from "next/link";
 import { Button } from "../ui/button";
+import { JoinEventDelete } from "./JoinEventDelete";
+import { id } from "date-fns/locale";
 
 export interface IEvents {
   _id?: string;
@@ -66,12 +68,13 @@ const MyJoinCard = ({ event }: { event: IEvents }) => {
       </CardContent>
 
       {/* Footer */}
-      <CardFooter className="px-4 pb-4 pt-2">
-        <Link href={`/allEvents/${_id}`}>
+      <CardFooter className="px-4 lg:flex justify-between gap-4  pb-4 pt-2">
+        <Link className="" href={`/allEvents/${_id}`}>
           <Button className="w-full gap-2 cursor-pointer bg-teal-600 text-white hover:bg-teal-700">
             View Event <ArrowRight className="size-4" />
           </Button>
         </Link>
+         <JoinEventDelete id={id} />
       </CardFooter>
     </Card>
   );
