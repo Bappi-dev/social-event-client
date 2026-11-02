@@ -35,7 +35,7 @@ export default function WhyChooseUs() {
   ];
 
   return (
-    <section className="relative overflow-hidden bg-slate-950 py-10 border-t border-slate-900">
+    <section className="relative overflow-hidden  py-10 border-t border-slate-900">
       {/* Background Decorative Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-96 w-96 rounded-full bg-cyan-500/10 blur-3xl pointer-events-none" />
 
@@ -46,7 +46,7 @@ export default function WhyChooseUs() {
             <Sparkles className="h-3.5 w-3.5 text-cyan-400" />
             <span>Why Choose GoodGather</span>
           </div>
-          <h2 className="text-3xl font-extrabold text-white sm:text-4xl">
+          <h2 className="text-3xl font-extrabold  sm:text-4xl">
             Empowering You to Make a Difference
           </h2>
           <p className="mt-4 text-sm text-slate-400 leading-relaxed">

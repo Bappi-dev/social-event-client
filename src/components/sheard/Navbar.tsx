@@ -22,6 +22,7 @@ import {
 } from "../ui/popover";
 
 import { toast } from "../ui/toast";
+import { ThemeToggle } from "../provider/ThemeToggle";
 
 export default function Navbar() {
   const { data: session } = authClient.useSession();
@@ -36,7 +37,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-cyan-400 bg-slate-900/80 backdrop-blur-md">
+    <nav className="sticky top-0 z-50 border-b border-cyan-40 backdrop-blur-md">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         {/* App Logo */}
         <Link href="/" className="flex items-center gap-3 group">
@@ -56,7 +57,7 @@ export default function Navbar() {
               />
             </svg>
           </div>
-          <span className="tracking-wide text-white">
+          <span className="tracking-wide ">
             <p className="text-xl">
               Good<span className="text-cyan-400">Gather</span>
             </p>
@@ -75,7 +76,7 @@ export default function Navbar() {
 
         <div className="flex items-center gap-6">
           <div className="cursor-pointer">
-            <SunDim className="text-white" size={20} />
+            <ThemeToggle/>
           </div>
           {user ? (
             <Popover>
@@ -161,7 +162,17 @@ export default function Navbar() {
                   <span>Sign Out</span>
                 </Button>
               </PopoverContent>
+
+              <Button
+                  onClick={handleSignout}
+                  variant="destructive"
+                  className=" justify-center gap-2 rounded-xl bg-red-600/20 text-red-400 hover:bg-red-600 hover:text-white border border-red-500/30 text-xs font-bold h-9 transition-all"
+                >
+                  <LogOut className="h-3.5 w-3.5" />
+                  <span>Sign Out</span>
+                </Button>
             </Popover>
+              
           ) : (
             <Button className="bg-cyan-500 px-4 text-slate-950 font-semibold hover:bg-cyan-200">
               <Link href="/login">Login</Link>

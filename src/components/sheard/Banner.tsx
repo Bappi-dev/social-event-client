@@ -7,7 +7,7 @@ import Image from "next/image";
 
 export default function Banner() {
   return (
-    <div className="relative overflow-hidden bg-slate-950 py-15 lg:py-28">
+    <div className="relative overflow-hidden  py-15 lg:py-28">
       <div className="absolute -top-24 -left-20 h-96 w-96 rounded-full bg-cyan-500/15 blur-3xl" />
       <div className="absolute top-1/2 -right-20 h-96 w-96 rounded-full bg-orange-500/10 blur-3xl" />
 
@@ -16,12 +16,12 @@ export default function Banner() {
           <div className="lg:col-span-7 text-center lg:text-left">
             {/* Top Pill Badge */}
             <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-950/40 px-4 py-1.5 text-xs font-semibold text-cyan-300 backdrop-blur-md mb-6">
-              <Sparkles className="h-3.5 w-3.5 text-cyan-400" />
+              <Sparkles className="h-3.5 w-3.5 text-cyan-200" />
               <span>Winter Social Drive 2026</span>
             </div>
 
             {/* Main Headline */}
-            <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl leading-tight">
+            <h1 className="text-4xl font-extrabold tracking-tight  sm:text-5xl lg:text-6xl leading-tight">
               Spread Warmth This Winter with{" "}
               <span className="bg-gradient-to-r from-cyan-400 via-sky-300 to-orange-400 bg-clip-text text-transparent">
                 GoodGather

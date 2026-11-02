@@ -5,8 +5,7 @@ import "./globals.css";
 import Footer from "@/components/sheard/Footer";
 import Navbar from "@/components/sheard/Navbar";
 import { Toaster } from "@/components/ui/toast";
-
-
+import { ThemeProvider } from "@/components/provider/ThemeProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,11 +29,18 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       data-theme="dark"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-           <Navbar />
-        <main>{children}</main>
-        <Toaster />
-        <Footer />
+      <body suppressHydrationWarning className="min-h-full  flex flex-col">
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <Navbar />
+          <main>{children}</main>
+          <Toaster />
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

@@ -49,15 +49,15 @@ const galleryItems = [
 
 export default function GallerySection() {
   return (
-    <section className="py-16  bg-slate-950 ">
+    <section className="py-16">
       <div className="container mx-auto px-4 max-w-6xl">
         
         {/* Section Header */}
         <div className="text-center space-y-2 mb-12">
-          <h2 className="text-3xl sm:text-4xl font-extrabold  text-white">
+          <h2 className="text-3xl sm:text-4xl font-extrabold ">
             Community in Action
           </h2>
-          <p className="text-sm sm:text-basemax-w-xl text-gray-300 mx-auto">
+          <p className="text-sm sm:text-basemax-w-xl text-gray-500 mx-auto">
             Moments from volunteer drives, relief distributions, and green initiatives across Dhaka and beyond.
           </p>
         </div>

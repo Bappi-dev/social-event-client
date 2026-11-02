@@ -28,20 +28,20 @@ const RecentEvents = async () => {
   // console.log(resentData);
 
   return (
-    <div className="bg-slate-950">
+    <div className="">
       <div className="container mx-auto p-10">
         <div className="flex justify-between items-center">
           <div>
-            <span className="flex text-cyan-400 items-center gap-2">
+            <span className="flex text-cyan-500 items-center gap-2">
               <Sparkles className="h-3.5 w-3.5 text-cyan-400" /> Winter Social
               Drive 2026
             </span>
-            <h1 className="text-4xl text-white font-bold mb-8">
+            <h1 className="text-4xl  font-bold mb-8">
               Recent Upcoming Events
             </h1>
           </div>
           <div>
-            <Link href={'/allEvents'}><p className="text-cyan-400 flex items-center gap-1">View All Events <ArrowRight size={15} /></p></Link>
+            <Link href={'/allEvents'}><p className=" flex items-center gap-1">View All Events <ArrowRight size={15} /></p></Link>
           </div>
         </div>
 

@@ -31,7 +31,7 @@ export function DeleteEvent({ id }: { id: string }) {
     <AlertDialog>
       <AlertDialogTrigger
         render={
-          <Button variant={"destructive"}>
+          <Button className={'cursor-pointer'} variant={"destructive"}>
             <Trash /> Delete
           </Button>
         }

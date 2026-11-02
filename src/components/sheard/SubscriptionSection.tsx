@@ -28,7 +28,7 @@ export default function SubscriptionSection() {
   };
 
   return (
-    <section className="relative overflow-hidden bg-slate-900/60 border-y border-slate-800/80 py-16 px-4 ">
+    <section className="relative overflow-hidden  border-y border-slate-800/80 py-16 px-4 ">
       {/* Background Glow Effect */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl pointer-events-none" />
 
@@ -65,7 +65,7 @@ export default function SubscriptionSection() {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email address..."
-                  className="w-full rounded-xl border border-slate-800 bg-slate-900 py-3.5 pl-10 pr-4 text-xs text-white placeholder:text-slate-500 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500 transition-all"
+                  className="w-full rounded-xl border border-cyan-200 bg-slate-900 py-3.5 pl-10 pr-4 text-xs text-white placeholder:text-slate-500 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500 transition-all"
                 />
               </div>
 
