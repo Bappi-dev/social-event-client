@@ -9,6 +9,7 @@ import { Card, CardContent, CardFooter } from "../ui/card";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../ui/button";
+import { getTokenFormServer } from "@/lib/getTokenFormServer";
 
 interface IEvent {
   _id: string;
@@ -21,8 +22,14 @@ interface IEvent {
 }
 
 const RecentEvents = async () => {
-  const res = await fetch("http://localhost:5000/resent-events", {
+
+  const token = await getTokenFormServer()
+
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/resent-events`, {
     cache: "no-store",
+    headers:{
+       authorization: `Bearer ${token}`,
+    }
   });
   const resentData: IEvent[] = await res.json();
   // console.log(resentData);

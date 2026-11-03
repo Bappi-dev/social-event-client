@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { PencilSparkles } from "lucide-react";
 import { toast } from "../ui/toast";
+import { getTokenFormClient } from "@/lib/getTokenFormClinet";
 
 interface IEvents {
   _id: string;
@@ -42,11 +43,14 @@ export function EditEvent({ event, onUpdateSuccess }: { event: IEvents; onUpdate
 
     try {
       const { _id, ...updatedData } = eventData;
+ 
+      const token = await getTokenFormClient()
 
-      const res = await fetch(`http://localhost:5000/events/${event._id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/events/${event._id}`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json',
+           authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(updatedData),
       });

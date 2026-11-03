@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { Image as Send, AlertCircle, ArrowLeft, Loader2 } from "lucide-react";
 import Link from "next/link";
 import { toast } from "@/components/ui/toast";
+import { getTokenFormClient } from "@/lib/getTokenFormClinet";
 
 export default function CreateEventForm({ userEmail }: { userEmail: string }) {
   const router = useRouter();
@@ -40,11 +41,14 @@ export default function CreateEventForm({ userEmail }: { userEmail: string }) {
 
     setLoading(true);
 
+    const token = await getTokenFormClient()
+
     try {
-      const res = await fetch("http://localhost:5000/events", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/events`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(finalEventPayload),
       });

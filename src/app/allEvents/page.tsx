@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Spinner } from "@/components/ui/spinner";
 import EventCard from "@/components/events/EventCard";
 
+
 const AllEvents = () => {
   const [events, setEvents] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -11,14 +12,25 @@ const AllEvents = () => {
   useEffect(() => {
     const fetchEvents = async () => {
       try {
-        const res = "http://localhost:5000/events";
+        const res = `${process.env.NEXT_PUBLIC_API_URL}/events`;
         const response = await fetch(res, {
           cache: "no-store",
         });
-        const data = await response.json();
-        setEvents(data);
+        const result = await response.json();
+        
+  
+        if (Array.isArray(result)) {
+          setEvents(result);
+        } else if (result && Array.isArray(result.data)) {
+          setEvents(result.data);
+        } else if (result && Array.isArray(result.events)) {
+          setEvents(result.events);
+        } else {
+          setEvents([]); 
+        }
       } catch (error) {
         console.error("Failed to fetch events:", error);
+        setEvents([]); 
       } finally {
         setLoading(false);
       }
@@ -27,15 +39,16 @@ const AllEvents = () => {
     fetchEvents();
   }, []);
 
-
   const currentDate = new Date();
   currentDate.setHours(0, 0, 0, 0);
 
-  const upcomingEvents = events.filter((event) => {
+  const safeEvents = Array.isArray(events) ? events : [];
+
+  const upcomingEvents = safeEvents.filter((event) => {
+    if (!event || (!event.eventDate && !event.date)) return false;
     const eventDate = new Date(event.eventDate || event.date);
     return eventDate >= currentDate;
   });
-
 
   const sortedEvents = [...upcomingEvents].sort((a, b) => {
     if (sortBy === "latest") {
@@ -49,9 +62,9 @@ const AllEvents = () => {
         new Date(b.eventDate || 0).getTime()
       );
     } else if (sortBy === "title-asc") {
-      return a.title.localeCompare(b.title);
+      return (a.title || "").localeCompare(b.title || "");
     } else if (sortBy === "title-desc") {
-      return b.title.localeCompare(a.title);
+      return (b.title || "").localeCompare(a.title || "");
     }
     return 0;
   });
@@ -94,7 +107,7 @@ const AllEvents = () => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {sortedEvents.map((event) => (
-            <EventCard key={event._id} event={event} />
+            <EventCard key={event._id || event.id} event={event} />
           ))}
         </div>
       )}

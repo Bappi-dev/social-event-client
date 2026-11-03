@@ -2,6 +2,7 @@
 import { HeartHandshake, Share2 } from "lucide-react";
 import { Button } from "../ui/button";
 import { toast } from "../ui/toast";
+import { getTokenFormClient } from "@/lib/getTokenFormClinet";
 
 interface IEventJoin {
   _id: string;
@@ -22,12 +23,15 @@ const JoinCard = ({ event }: { event: IEventJoin }) => {
       ...event,
       JoinDate: new Date(),
     };
-
+ 
+    const token = await getTokenFormClient()
+      
     try {
-      const res = await fetch('http://localhost:5000/events-join', {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/events-join`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json', 
+           authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(data),
       });

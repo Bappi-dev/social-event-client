@@ -2,6 +2,7 @@ import { DeleteEvent } from "@/components/events/DeleteEvent";
 import { EditEvent } from "@/components/events/EditEvents";
 import JoinCard from "@/components/events/JoinCard";
 import DetalisCardR from "@/components/sheard/DetalisCardR";
+import { getTokenFormServer } from "@/lib/getTokenFormServer";
 import { ArrowLeft, Calendar, MapPin } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -13,9 +14,11 @@ interface IEventDetailsProps {
 const EventDetailsPage = async ({ params }: IEventDetailsProps) => {
   const { id } = await params; 
 
-  const res = await fetch(`http://localhost:5000/allevents/${id}`, {
+     const token = await getTokenFormServer()
+  
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/allevents/${id}`, {
      headers:{
-       authorization:'user logged in'
+       authorization: `Bearer ${token}`,
      }
   });
   

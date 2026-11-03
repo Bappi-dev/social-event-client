@@ -1,6 +1,7 @@
 import ManageEventsCard from "@/components/events/ManageEventsCard";
 import { Button } from "@/components/ui/button";
 import { auth } from "@/lib/auth";
+import { getTokenFormServer } from "@/lib/getTokenFormServer";
 import { CirclePlus } from "lucide-react";
 import { headers } from "next/headers";
 import Link from "next/link";
@@ -18,18 +19,26 @@ interface IEvent {
 const ManageEventsPage = async () => {
   const session = await auth.api.getSession({ headers: await headers() });
   const user = session?.user;
- 
 
-  const res = await fetch(`http://localhost:5000/events/${user?.email}`, {
-    cache: "no-store",
-  });
+  const token = await getTokenFormServer();
   
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/events/${user?.email}`, {
+    cache: "no-store",
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  });
+
   if (!res.ok) {
-    return <div className="text-center py-10 text-red-400">Failed to load events.</div>;
+    return (
+      <div className="text-center py-10 text-red-400">
+        Failed to load events.
+      </div>
+    );
   }
 
   const manageEvents: IEvent[] = await res.json();
-  console.log('evnets', manageEvents);
+  console.log("evnets", manageEvents);
 
   return (
     <div className="container mx-auto my-8 px-4 max-w-6xl">
@@ -58,7 +67,9 @@ const ManageEventsPage = async () => {
           ))
         ) : (
           <div className="rounded-2xl  p-12 text-center my-8">
-            <p className="text-slate-400 text-sm">You have not created any events yet.</p>
+            <p className="text-slate-400 text-sm">
+              You have not created any events yet.
+            </p>
           </div>
         )}
       </div>

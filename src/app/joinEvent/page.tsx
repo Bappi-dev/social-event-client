@@ -1,12 +1,17 @@
 import MyJoinCard from "@/components/events/MyJoinCard";
+import { getTokenFormServer } from "@/lib/getTokenFormServer";
 import React from "react";
 
 const JoinEvent = async () => {
-  const res = await fetch("http://localhost:5000/events-join", {
-    cache: "no-store"
+   const  token = await getTokenFormServer()
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/events-join`, {
+    cache: "no-store",
+    headers:{
+       authorization: `Bearer ${token}`,
+    }
   });
+  
   const joinEvent = await res.json();
-  console.log(joinEvent);
 
   return (
     <div className="container mx-auto p-5">

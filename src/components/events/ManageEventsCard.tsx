@@ -7,6 +7,7 @@ import { EditEvent } from "./EditEvents";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { toast } from "../ui/toast";
+import { getTokenFormClient } from "@/lib/getTokenFormClinet";
 
 interface IEvent {
   _id: string;
@@ -29,9 +30,13 @@ export default function ManageEventsCard({ event }: { event: IEvent }) {
     if (!confirmDelete) return;
 
     setDeleting(true);
+    const token = await getTokenFormClient()
     try {
-      const res = await fetch(`http://localhost:5000/events/${id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/events/${id}`, {
         method: "DELETE",
+        headers:{
+           authorization: `Bearer ${token}`,
+        }
       });
 
       if (res.ok) {

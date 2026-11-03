@@ -14,14 +14,21 @@ import { Button } from "@/components/ui/button";
 import { Trash } from "lucide-react";
 import { useRouter } from "next/navigation"; // 👈 redirect এর বদলে useRouter ব্যবহার করা হয়েছে
 import { toast } from "../ui/toast";
+import { getTokenFormClient } from "@/lib/getTokenFormClinet";
 
 export function DeleteEvent({ id }: { id: string }) {
   const router = useRouter();
 
   const handleDeleteEvent = async () => {
+
+    const token = await getTokenFormClient()
+
     try {
-      const res = await fetch(`http://localhost:5000/events/${id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/events/${id}`, {
         method: "DELETE",
+        headers:{
+           authorization: `Bearer ${token}`,
+        }
       });
       const data = await res.json();
 

@@ -3,8 +3,13 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Mail, ShieldCheck } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
 
+interface DetalisCardRProps {
+  event: {
+    organizer?: string;
+  };
+}
 
-const DetalisCardR = ({event}) => {
+const DetalisCardR = ({ event }: DetalisCardRProps) => {
     const { data: session } = authClient.useSession();
   const user = session?.user;
   return (
