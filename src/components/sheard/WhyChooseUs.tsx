@@ -35,14 +35,14 @@ export default function WhyChooseUs() {
   ];
 
   return (
-    <section className="relative overflow-hidden  py-10 border-t border-slate-900">
+    <section className="relative overflow-hidden  py-10 border-t">
       {/* Background Decorative Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-96 w-96 rounded-full bg-cyan-500/10 blur-3xl pointer-events-none" />
 
       <div className="container relative mx-auto px-4">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-10">
-          <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-950/40 px-4 py-1.5 text-xs font-semibold text-cyan-300 backdrop-blur-md mb-4">
+          <div className="inline-flex items-center gap-2 rounded-full  border-gray-200 bg-cyan-950/40 px-4 py-1.5 text-xs font-semibold text-cyan-300 backdrop-blur-md mb-4">
             <Sparkles className="h-3.5 w-3.5 text-cyan-400" />
             <span>Why Choose GoodGather</span>
           </div>
@@ -60,12 +60,12 @@ export default function WhyChooseUs() {
           {features.map((feature, idx) => (
             <div
               key={idx}
-              className="group relative rounded-2xl border border-slate-800/80 bg-slate-900/60 p-6 backdrop-blur-xl hover:border-cyan-500/50 hover:bg-slate-900 transition-all duration-300 hover:-translate-y-1"
+              className="group relative rounded-2xl border   p-6 backdrop-blur-xl hover:border-cyan-500/50 transition-all duration-300 hover:-translate-y-1"
             >
-              <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-slate-950 border border-slate-800 group-hover:border-cyan-500/40 transition-colors">
+              <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl  group-hover:border-cyan-500/40 transition-colors">
                 {feature.icon}
               </div>
-              <h3 className="text-base font-bold text-white group-hover:text-cyan-300 transition-colors">
+              <h3 className="text-base font-bold group-hover:text-cyan-300 transition-colors">
                 {feature.title}
               </h3>
               <p className="mt-2 text-xs text-slate-400 leading-relaxed">

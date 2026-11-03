@@ -16,7 +16,7 @@ export default async function CreateEventPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-950 py-10 px-4">
+    <div className="min-h-screen  py-10 px-4">
       <CreateEventForm userEmail={user.email} />
     </div>
   );

@@ -8,8 +8,9 @@ import Image from "next/image";
 export default function Banner() {
   return (
     <div className="relative overflow-hidden  py-15 lg:py-28">
-      <div className="absolute -top-24 -left-20 h-96 w-96 rounded-full bg-cyan-500/15 blur-3xl" />
-      <div className="absolute top-1/2 -right-20 h-96 w-96 rounded-full bg-orange-500/10 blur-3xl" />
+      <div className="absolute -top-32 -left-20 h-[420px] w-200 rounded-full bg-cyan-500/20 blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/4 -right-20 h-[450px] w-200 rounded-full bg-amber-500/15 blur-[150px] pointer-events-none" />
+      <div className="absolute -bottom-20 -left-1/4 h-[350px] w-200 rounded-full bg-emerald-500/20 blur-[130px] pointer-events-none" />
 
       <div className="container relative mx-auto px-4">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
@@ -29,7 +30,7 @@ export default function Banner() {
             </h1>
 
             {/* Subtitle / Description */}
-            <p className="mt-6 text-base text-slate-300 sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+            <p className="mt-6 text-base text-gray-400 sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed">
               Empowering communities to organize blanket drives, healthcare
               camps, and food relief. Join thousands of volunteers bringing hope
               and comfort to those in need.
@@ -48,12 +49,9 @@ export default function Banner() {
               <Button
                 size="lg"
                 variant="outline"
-                className="w-full sm:w-auto border-slate-800 bg-slate-900/60 text-slate-200 hover:bg-slate-800 hover:text-white backdrop-blur-md"
+                className="w-full sm:w-auto border-slate-800  backdrop-blur-md"
               >
-                <Link
-                  href="/Events"
-                  className="flex  items-center gap-2"
-                >
+                <Link href="/Events" className="flex  items-center gap-2">
                   Create Event
                 </Link>
               </Button>

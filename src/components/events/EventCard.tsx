@@ -19,7 +19,7 @@ export type EventCardProps = {
 export default function EventCard({ event }: { event: EventCardProps }) {
   const { _id } = event;
   return (
-    <Card className="group overflow-hidden rounded-2xl border bg-card p-0 shadow-sm transition-shadow hover:shadow-md">
+    <Card className="group overflow-hidden rounded-2xl  bg-card p-0 shadow-sm transition-shadow hover:shadow-md">
       {/* Image */}
       <div className="relative h-44 w-full overflow-hidden">
         <Image

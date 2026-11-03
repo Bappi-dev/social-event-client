@@ -9,7 +9,7 @@ const DetalisCardR = ({event}) => {
   const user = session?.user;
   return (
     <div>
-        {user ?  <div className="rounded-2xl border border-slate-200/80 p-5 space-y-4 bg-white shadow-sm">
+        {user ?  <div className="rounded-2xl border border-slate-200/80 p-5 space-y-4  shadow-sm">
         <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400">
           Initiative Organizer
         </h4>
@@ -22,8 +22,8 @@ const DetalisCardR = ({event}) => {
             </AvatarFallback>
           </Avatar>
           <div>
-            <h5 className="font-bold text-slate-900 text-sm">{user?.name}</h5>
-            <p className="text-xs text-slate-500 flex items-center gap-1 mt-0.5">
+            <h5 className="font-bold text-sm">{user?.name}</h5>
+            <p className="text-xs text-teal-500 flex items-center gap-1 mt-0.5">
               <Mail className="size-3" />
                {user?.email || "user@example.com"}
             </p>

@@ -2,48 +2,49 @@
 import Image from "next/image";
 import { MapPin } from "lucide-react";
 
+
 const galleryItems = [
   {
     id: "1",
     title: "Winter Clothes Drive",
     category: "WINTER FOR RICKSHAW PULLERS",
     location: "Mirpur 10, Dhaka",
-    image: "/images/winter.jpg", 
+    image: "https://images.unsplash.com/photo-1532629345422-7515f3d16bb9?auto=format&fit=crop&w=800&q=80", 
   },
   {
     id: "2",
     title: "Night Blanket Relief",
     category: "SHIT/SHELTER NIGHT SUPPORT",
     location: "Mohammadpur, Dhaka",
-    image: "/images/blanket.jpg",
+    image: "https://images.unsplash.com/photo-1593113598332-cd288d649433?auto=format&fit=crop&w=800&q=80",
   },
   {
     id: "3",
     title: "Dhanmondi Lake Clean-up",
     category: "ECO PLASTIC-FREE WATERS",
     location: "Dhanmondi, Dhaka",
-    image: "/images/cleanup.jpg",
+    image: "https://images.unsplash.com/photo-1510312305653-8ed496efae75?auto=format&fit=crop&w=800&q=80",
   },
   {
     id: "4",
     title: "Urban Tree Plantation",
     category: "1000 GREEN SAPLINGS",
     location: "Uttara, Dhaka",
-    image: "/images/tree.jpg",
+    image: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&w=800&q=80",
   },
   {
     id: "5",
     title: "Community Food Relief",
     category: "FRESH MEALS SHARING",
     location: "Old Dhaka",
-    image: "/images/food.jpg",
+    image: "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=800&q=80",
   },
   {
     id: "6",
     title: "Children Book & Bag Drive",
     category: "EDUCATION FOR UNDERPRIVILEGED",
     location: "Ramna/Shahbag, Dhaka",
-    image: "/images/books.jpg",
+    image: "https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=800&q=80",
   },
 ];
 
@@ -54,10 +55,11 @@ export default function GallerySection() {
         
         {/* Section Header */}
         <div className="text-center space-y-2 mb-12">
+          <p className="font-bold text-[#009689]">Visual Stories</p>
           <h2 className="text-3xl sm:text-4xl font-extrabold ">
             Community in Action
           </h2>
-          <p className="text-sm sm:text-basemax-w-xl text-gray-500 mx-auto">
+          <p className="text-sm sm:text-basemax-w-xl text-gray-400 mx-auto">
             Moments from volunteer drives, relief distributions, and green initiatives across Dhaka and beyond.
           </p>
         </div>

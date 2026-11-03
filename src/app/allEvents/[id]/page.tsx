@@ -14,7 +14,9 @@ const EventDetailsPage = async ({ params }: IEventDetailsProps) => {
   const { id } = await params; 
 
   const res = await fetch(`http://localhost:5000/allevents/${id}`, {
-    cache: "no-store",
+     headers:{
+       authorization:'user logged in'
+     }
   });
   
   if (!res.ok) {
@@ -24,7 +26,7 @@ const EventDetailsPage = async ({ params }: IEventDetailsProps) => {
   const event = await res.json(); 
 
   return (
-    <div className="min-h-screen bg-slate-50 py-10">
+    <div className="min-h-screen py-10">
       <div className="container mx-auto max-w-5xl px-4">
         <div className="flex justify-between items-center mb-5">
           <Link href={"/allEvents"}>
@@ -39,9 +41,9 @@ const EventDetailsPage = async ({ params }: IEventDetailsProps) => {
         </div>
 
         {/* Main Card Wrapper */}
-        <div className="overflow-hidden rounded-3xl bg-white shadow-xl border border-slate-100">
+        <div className="overflow-hidden rounded-3xl  shadow-xl border border-slate-100">
           {/* 1. Hero Banner Section */}
-          <div className="relative h-72 sm:h-96 w-full bg-slate-950">
+          <div className="relative h-72 sm:h-96 w-full ">
             <Image
               src={event.thumbnail || "/placeholder.jpg"}
               alt={event.title || "Event Banner"}
@@ -50,7 +52,7 @@ const EventDetailsPage = async ({ params }: IEventDetailsProps) => {
               priority
             />
             {/* Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+            <div className="absolute inset-0  to-transparent" />
 
             {/* Event Type Badge */}
             <div className="absolute top-6 left-6 rounded-full bg-white/20 backdrop-blur-md px-4 py-1.5 text-xs font-bold text-white border border-white/30 flex items-center gap-1.5">
@@ -60,7 +62,7 @@ const EventDetailsPage = async ({ params }: IEventDetailsProps) => {
 
             {/* Title & Meta Info */}
             <div className="absolute bottom-6 left-6 right-6 text-white space-y-3">
-              <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight">
+              <h1 className="text-2xl sm:text-4xl font-extrabold  tracking-tight">
                 {event.title}
               </h1>
 
@@ -86,20 +88,20 @@ const EventDetailsPage = async ({ params }: IEventDetailsProps) => {
             <div className="lg:col-span-2 space-y-8">
               {/* About Section */}
               <div className="space-y-3">
-                <h2 className="text-xl font-bold text-slate-900">
+                <h2 className="text-xl font-bold">
                   About this Social Initiative
                 </h2>
-                <p className="text-slate-600 leading-relaxed text-sm sm:text-base">
+                <p className=" leading-relaxed text-sm sm:text-base">
                   {event.description}
                 </p>
               </div>
 
               {/* Volunteer Guidelines */}
-              <div className="space-y-4 rounded-2xl bg-slate-50 p-6 border border-slate-100">
-                <h3 className="font-bold text-slate-900 text-sm uppercase tracking-wider text-teal-800">
+              <div className="space-y-4 rounded-2xl  p-6  border-gray-100">
+                <h3 className="font-bold text-sm uppercase tracking-wider text-teal-500">
                   Volunteer Guidelines
                 </h3>
-                <ul className="space-y-3 text-sm text-slate-600">
+                <ul className="space-y-3 text-sm t">
                   <li className="flex items-start gap-2.5">
                     <span className="size-2 rounded-full bg-teal-600 mt-1.5 shrink-0" />
                     <span>

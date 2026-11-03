@@ -44,16 +44,16 @@ const JoinCard = ({ event }: { event: IEventJoin }) => {
 
   return (
     <div>
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-6 border-b border-slate-100 bg-white">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-6 border-b border-b-gray-500">
         <div className="flex items-center gap-3 w-full sm:w-auto">
           <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-teal-50 text-teal-600">
             <HeartHandshake className="size-6" />
           </div>
           <div>
-            <h3 className="font-bold text-slate-900">
+            <h3 className="font-bold">
               Volunteers Joined
             </h3>
-            <p className="text-xs text-slate-500">
+            <p className="text-xs">
               Sign up to join hands for this drive
             </p>
           </div>
@@ -66,7 +66,7 @@ const JoinCard = ({ event }: { event: IEventJoin }) => {
               size="icon"
               className="rounded-xl size-11"
             >
-              <Share2 className="size-4 text-slate-600" />
+              <Share2 className="size-4" />
             </Button>
             <Button
               type="submit"

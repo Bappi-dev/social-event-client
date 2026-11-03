@@ -57,12 +57,12 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="relative flex min-h-[calc(100vh-4rem)] items-center justify-center bg-slate-950 px-4 py-12">
+    <div className="relative flex min-h-[calc(100vh-4rem)] items-center justify-center  px-4 py-12">
       {/* Background Decorative Ambient Glows */}
       <div className="absolute top-1/4 left-10 h-72 w-72 rounded-full bg-cyan-500/10 blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/4 right-10 h-72 w-72 rounded-full bg-orange-500/10 blur-3xl pointer-events-none" />
 
-      <Card className="relative w-full max-w-md border-slate-800/80 bg-slate-900/80 text-slate-100 shadow-2xl backdrop-blur-xl">
+      <Card className="relative w-full max-w-md  bg-slate-900/80 text-slate-100 shadow-2xl backdrop-blur-xl">
         <CardHeader className="text-center space-y-2">
           {/* Logo Brand Header */}
           <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-slate-950 border border-slate-800 ring-2 ring-cyan-500/50 shadow-[0_0_15px_rgba(6,182,212,0.35)]">

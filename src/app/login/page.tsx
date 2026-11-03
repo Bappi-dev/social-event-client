@@ -16,6 +16,7 @@ import {
 import { authClient } from "@/lib/auth-client";
 // import { redirect, useRouter } from "next/navigation";
 import { toast } from "@/components/ui/toast";
+import { redirect } from "next/navigation";
 
 export default function LoginPage() {
   // const router = useRouter();

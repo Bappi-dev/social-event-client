@@ -4,6 +4,7 @@ import Link from "next/link";
 import {
   Calendar,
   CheckCircle,
+  CirclePlus,
   CircleUserRound,
   LogOut,
   Mail,
@@ -37,7 +38,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-cyan-40 backdrop-blur-md">
+    <nav className="sticky top-0 z-50  backdrop-blur-md p-2">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         {/* App Logo */}
         <Link href="/" className="flex items-center gap-3 group">
@@ -65,12 +66,17 @@ export default function Navbar() {
         </Link>
 
         {/* Upcoming Events Link */}
-        <Link
+        <div className="lg:flex items-center gap-4">
+          <Link
           href="/allEvents"
           className="text-sm font-medium text-slate-300 hover:text-orange-400 transition-colors flex items-center gap-1.5"
         >
           <Calendar className="h-4 w-4" /> Upcoming Events
         </Link>
+        <Link className="text-sm font-medium text-slate-300 hover:text-orange-400 transition-colors flex items-center gap-1.5" href={'/Events'}>
+          <CirclePlus size={12} /> Create Event
+        </Link>
+        </div>
 
         {/* Navigation / Auth Section */}
 
@@ -83,7 +89,7 @@ export default function Navbar() {
               {/* Trigger Button with Avatar */}
               <PopoverTrigger>
                 <button className="rounded-full outline-none ring-offset-background transition-transform hover:scale-105 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
-                  <Avatar className="h-10 w-10 border border-slate-700/50 shadow-sm">
+                  <Avatar className="h-10 w-10 border border-red-700/50 shadow-sm">
                     <AvatarImage
                       referrerPolicy="no-referrer"
                       src={user?.image || undefined}

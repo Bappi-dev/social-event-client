@@ -18,8 +18,6 @@ import { Label } from "@/components/ui/label";
 import { PencilSparkles } from "lucide-react";
 import { toast } from "../ui/toast";
 
-
-
 interface IEvents {
   _id: string;
   title: string;
@@ -59,8 +57,8 @@ export function EditEvent({ event, onUpdateSuccess }: { event: IEvents; onUpdate
       if (res.ok) {
         setIsOpen(false); 
         toast.add({
-          title:"Event updated successfully! 🎉",
-          type:'success',
+          title: "Event updated successfully! 🎉",
+          type: 'success',
         });
         if (onUpdateSuccess) 
             onUpdateSuccess(); 
@@ -77,16 +75,16 @@ export function EditEvent({ event, onUpdateSuccess }: { event: IEvents; onUpdate
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger >
-        <Button variant={"outline"} className="gap-1.5 cursor-pointer">
-          <PencilSparkles className="h-4 w-4 text-cyan-400 " /> Edit
+        <Button variant={"outline"} className="gap-1.5  cursor-pointer">
+          <PencilSparkles className="h-4 w-4 text-cyan-400" /> Edit
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="sm:max-w-md  text-slate-100">
+      <DialogContent className="sm:max-w-md bg-black border border-slate-800 text-white shadow-2xl">
         <form onSubmit={handleSubmit} className="space-y-4">
           <DialogHeader>
-            <DialogTitle className="text-black">Edit Event</DialogTitle>
-            <DialogDescription className="text-slate-400">
+            <DialogTitle className="text-white">Edit Event</DialogTitle>
+            <DialogDescription className="text-slate-400 text-xs">
               Make changes to your community event here. Click save when you're done.
             </DialogDescription>
           </DialogHeader>
@@ -167,9 +165,9 @@ export function EditEvent({ event, onUpdateSuccess }: { event: IEvents; onUpdate
             </Field>
           </FieldGroup>
 
-          <DialogFooter className="pt-4 border-t border-slate-800">
-            <DialogClose >
-              <Button type="button" variant="outline" className="border-slate-700 bg-slate-800 text-slate-200 hover:bg-slate-700">
+          <DialogFooter className="pt-4 border-t border-slate-800 flex gap-2">
+            <DialogClose>
+              <Button type="button" variant="outline" className="border-slate-700 cursor-pointer bg-slate-900 text-slate-200 hover:bg-slate-800">
                 Cancel
               </Button>
             </DialogClose>

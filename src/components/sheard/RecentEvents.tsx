@@ -33,22 +33,22 @@ const RecentEvents = async () => {
         <div className="flex justify-between items-center">
           <div>
             <span className="flex text-cyan-500 items-center gap-2">
-              <Sparkles className="h-3.5 w-3.5 text-cyan-400" /> Winter Social
-              Drive 2026
+              <Sparkles className="h-3.5 w-3.5 text-cyan-400" /> Upcoming Initiatives  
             </span>
-            <h1 className="text-4xl  font-bold mb-8">
+            <h1 className="text-4xl  font-bold mb-2">
               Recent Upcoming Events
             </h1>
+            <p className="mb-8 text-slate-400">Latest 6 community drives scheduled in your city. Get involved today.</p>
           </div>
           <div>
-            <Link href={'/allEvents'}><p className=" flex items-center gap-1">View All Events <ArrowRight size={15} /></p></Link>
+            <Link href={'/allEvents'}><p className=" flex items-center gap-1 text-amber-200">View All Events <ArrowRight size={15} /></p></Link>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {resentData.map((event) => (
             <div key={event._id}>
-              <Card className="group overflow-hidden rounded-2xl border border-slate-800 bg-slate-900 p-0 shadow-lg transition-all hover:border-teal-500/50 hover:shadow-xl">
+              <Card className="group overflow-hidden rounded-2xl   p-0 shadow-lg transition-all hover:border-teal-500/50 hover:shadow-xl">
                 {/* Image */}
                 <div className="relative h-44 w-full overflow-hidden bg-slate-950">
                   <Image
@@ -69,8 +69,8 @@ const RecentEvents = async () => {
                 </div>
 
                 {/* Body */}
-                <CardContent className="space-y-2 px-4 pb-0 pt-4 text-slate-200">
-                  <h3 className="line-clamp-1 text-base font-bold tracking-tight text-white group-hover:text-teal-300 transition-colors">
+                <CardContent className="space-y-2 px-4 pb-0 pt-4 ">
+                  <h3 className="line-clamp-1 text-base font-bold tracking-tight  group-hover:text-teal-300 transition-colors">
                     {event.title}
                   </h3>
 
@@ -92,7 +92,7 @@ const RecentEvents = async () => {
                 {/* Footer */}
                 <CardFooter className="px-4 pb-4 pt-2">
                   <Link href={`/events/${event._id}`} className="w-full">
-                    <Button className="w-full gap-2 cursor-pointer bg-teal-600 text-white hover:bg-teal-700">
+                    <Button className="w-full gap-2 cursor-pointer bg-teal-600 text-green-400 hover:bg-teal-700">
                       View Event <ArrowRight className="size-4" />
                     </Button>
                   </Link>
