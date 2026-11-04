@@ -23,13 +23,10 @@ interface IEvent {
 
 const RecentEvents = async () => {
 
-  const token = await getTokenFormServer()
+ 
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/resent-events`, {
     cache: "no-store",
-    headers:{
-       authorization: `Bearer ${token}`,
-    }
   });
   const resentData: IEvent[] = await res.json();
   // console.log(resentData);

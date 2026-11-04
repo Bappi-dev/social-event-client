@@ -26,48 +26,96 @@ export default function RegisterPage() {
     password: "",
   });
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  // Google Login Handler
+  const handleGoogleLogin = async () => {
+    try {
+      await authClient.signIn.social({
+        provider: "google",
+        callbackURL: "/",
+      });
+    } catch (err) {
+      toast.add({
+        description: "Google sign-in failed. Please try again.",
+        type: "error",
+      });
+    }
+  };
+
+  // Password Validation Rule Checker
+  const validatePassword = (pwd: string) => {
+    const hasUpper = /[A-Z]/.test(pwd);
+    const hasLower = /[a-z]/.test(pwd);
+    const isMinLength = pwd.length >= 6;
+
+    if (!hasUpper) return "Password must contain at least one uppercase letter (A-Z).";
+    if (!hasLower) return "Password must contain at least one lowercase letter (a-z).";
+    if (!isMinLength) return "Password must be at least 6 characters long.";
+
+    return null;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    const formData = new FormData(e.target as HTMLFormElement);
-    const eventData = Object.fromEntries(formData.entries()) as {
-      name: string;
-      email: string;
-      ImageUrl: string;
-      password: string;
-    };
-
-    const { data, error } = await authClient.signUp.email({
-      ...eventData,
-    });
-    if (data) {
-      console.log(data);
-      toast.add({
-        description: "SignUp successfully!!",
-        type: "success",
-      });
-    }
-    if (error) {
-      console.log(error);
-    }
-
     setError("");
-    router.push("/");
+
+    // 1. Password validation check
+    const validationError = validatePassword(formData.password);
+    if (validationError) {
+      setError(validationError);
+      toast.add({
+        description: validationError,
+        type: "error",
+      });
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      // 2. BetterAuth Email Registration
+      const { data, error: authError } = await authClient.signUp.email({
+        email: formData.email,
+        password: formData.password,
+        name: formData.name,
+        image: formData.photoURL, // BetterAuth uses 'image' key for photo URL
+      });
+
+      if (data) {
+        toast.add({
+          description: "Sign Up successful!",
+          type: "success",
+        });
+        router.push("/");
+      }
+
+      if (authError) {
+        setError(authError.message || "Failed to create account. Please try again.");
+        toast.add({
+          description: authError.message || "Registration failed!",
+          type: "error",
+        });
+      }
+    } catch (err: any) {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="relative flex min-h-[calc(100vh-4rem)] items-center justify-center  px-4 py-12">
+    <div className="relative flex min-h-[calc(100vh-4rem)] items-center justify-center px-4 py-12">
       {/* Background Decorative Ambient Glows */}
       <div className="absolute top-1/4 left-10 h-72 w-72 rounded-full bg-cyan-500/10 blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/4 right-10 h-72 w-72 rounded-full bg-orange-500/10 blur-3xl pointer-events-none" />
 
-      <Card className="relative w-full max-w-md  bg-slate-900/80 text-slate-100 shadow-2xl backdrop-blur-xl">
+      <Card className="relative w-full max-w-md bg-slate-900/80 text-slate-100 shadow-2xl backdrop-blur-xl">
         <CardHeader className="text-center space-y-2">
           {/* Logo Brand Header */}
           <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-xl bg-slate-950 border border-slate-800 ring-2 ring-cyan-500/50 shadow-[0_0_15px_rgba(6,182,212,0.35)]">
             <svg
-              className="h-7 w-7 rounded-xl border border-teal-500/60 bg-slate-950 py-3 pl-10 pr-4 text-xs text-white placeholder:text-slate-600 focus:border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500 transition-all"
+              className="h-7 w-7 text-cyan-400"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -142,7 +190,7 @@ export default function RegisterPage() {
               <Input
                 required
                 type="url"
-                name="image"
+                name="photoURL"
                 placeholder="https://images.unsplash.com/your-photo.jpg"
                 className="border-slate-800 bg-slate-950 text-xs text-white placeholder:text-slate-500 focus:ring-cyan-500"
                 value={formData.photoURL}
@@ -169,27 +217,33 @@ export default function RegisterPage() {
                 }
               />
               <p className="mt-1 text-[11px] text-slate-500">
-                Must contain at least 6 characters, 1 uppercase, & 1 lowercase
-                letter.
+                Must contain at least 6 characters, 1 uppercase, & 1 lowercase letter.
               </p>
             </div>
 
             {/* Submit Button */}
             <Button
               type="submit"
-              className="w-full bg-cyan-500 text-slate-950 font-bold hover:bg-cyan-400 transition-all shadow-lg shadow-cyan-500/20"
+              disabled={loading}
+              className="w-full bg-cyan-500 text-slate-950 font-bold hover:bg-cyan-400 transition-all shadow-lg shadow-cyan-500/20 disabled:opacity-50"
             >
-              Sign Up
+              {loading ? "Creating Account..." : "Sign Up"}
             </Button>
           </form>
 
-          {/* Redirect Link to Login */}
+          {/* Google Sign-in Button */}
           <div className="mt-4">
-            <Button className=" w-full rounded-xl border-gray-200 bg-white font-semibold text-gray-700 transition hover:border-emerald-300 hover:bg-emerald-50">
+            <Button
+              type="button"
+              onClick={handleGoogleLogin}
+              className="w-full flex items-center justify-center gap-2 rounded-xl border border-slate-700 bg-slate-950 font-semibold text-slate-200 hover:bg-slate-800 transition"
+            >
               <FcGoogle className="text-xl" />
-              login with Google
+              Sign in with Google
             </Button>
           </div>
+
+          {/* Redirect Link to Login */}
           <div className="mt-6 border-t border-slate-800/80 pt-4 text-center">
             <p className="text-xs text-slate-400">
               Already have an account?{" "}
@@ -201,7 +255,6 @@ export default function RegisterPage() {
               </Link>
             </p>
           </div>
-          
         </CardContent>
       </Card>
     </div>

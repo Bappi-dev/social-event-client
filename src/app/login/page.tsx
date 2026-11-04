@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Mail, Link as Lock, AlertCircle } from "lucide-react";
+import { useRouter } from "next/navigation"; 
+import { Mail, Lock, AlertCircle } from "lucide-react"; 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { FcGoogle } from "react-icons/fc";
@@ -14,52 +15,71 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import { authClient } from "@/lib/auth-client";
-// import { redirect, useRouter } from "next/navigation";
 import { toast } from "@/components/ui/toast";
-import { redirect } from "next/navigation";
 
 export default function LoginPage() {
-  // const router = useRouter();
+  const router = useRouter(); 
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.target as HTMLFormElement);
-    const eventData = Object.fromEntries(formData.entries()) as {
-      email: string;
-      password: string;
-    };
-
-    const { data, error } = await authClient.signIn.email({
-      email: eventData.email,
-      password: eventData.password,
-    });
-    if (data) {
-      console.log(data);
-      toast.add({
-        description: "login successfully!!",
-        type: "success",
+  // Google Sign-In Handler
+  const handleGoogleLogin = async (e: React.MouseEvent) => {
+    e.preventDefault(); 
+    try {
+      await authClient.signIn.social({
+        provider: "google",
+        callbackURL: "/",
       });
-      redirect("/allEvents");
-    }
-    if (error) {
-      console.log(error);
+    } catch (err) {
       toast.add({
-        description: "Invalid email or password!!",
+        description: "Google sign-in failed!",
         type: "error",
       });
     }
-    // router.push("/");
+  };
+
+  // Email/Password Login Handler
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
     setError("");
+    setLoading(true);
+
+    try {
+      const { data, error: authError } = await authClient.signIn.email({
+        email: formData.email,
+        password: formData.password,
+      });
+
+      if (data) {
+        toast.add({
+          description: "Login successfully!!",
+          type: "success",
+        });
+  
+        router.push("/allEvents"); 
+      }
+
+      if (authError) {
+        const errorMsg = authError.message || "Invalid email or password!!";
+        setError(errorMsg);
+        toast.add({
+          description: errorMsg,
+          type: "error",
+        });
+      }
+    } catch (err) {
+      setError("Something went wrong. Please try again.");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
-    <div className="relative flex min-h-[calc(100vh-4rem)] items-center justify-center bg-slate-950 px-4 py-12">
+    <div className="relative flex min-h-[calc(100vh-4rem)] items-center justify-center px-4 py-12">
       {/* Background Decorative Ambient Glows */}
       <div className="absolute top-1/4 left-10 h-72 w-72 rounded-full bg-cyan-500/10 blur-3xl pointer-events-none" />
       <div className="absolute bottom-1/4 right-10 h-72 w-72 rounded-full bg-orange-500/10 blur-3xl pointer-events-none" />
@@ -83,10 +103,10 @@ export default function LoginPage() {
             </svg>
           </div>
           <CardTitle className="text-2xl font-extrabold text-white">
-            Join Good<span className="text-cyan-400">Gather</span>
+            Welcome Back to <span className="text-cyan-400">GoodGather</span>
           </CardTitle>
           <CardDescription className="text-xs text-slate-400">
-            Create an account to organize & participate in winter drives
+            Login to organize & participate in community drives
           </CardDescription>
         </CardHeader>
 
@@ -134,37 +154,39 @@ export default function LoginPage() {
                   setFormData({ ...formData, password: e.target.value })
                 }
               />
-              <p className="mt-1 text-[11px] text-slate-500">
-                Must contain at least 6 characters, 1 uppercase, & 1 lowercase
-                letter.
-              </p>
             </div>
 
             {/* Submit Button */}
             <Button
               type="submit"
-              className="w-full bg-cyan-500 text-slate-950 font-bold hover:bg-cyan-400 transition-all shadow-lg shadow-cyan-500/20"
+              disabled={loading}
+              className="w-full bg-cyan-500 text-slate-950 font-bold hover:bg-cyan-400 transition-all shadow-lg shadow-cyan-500/20 disabled:opacity-50"
             >
-              Login
+              {loading ? "Logging in..." : "Login"}
             </Button>
-
-            <div>
-              <Button className=" w-full rounded-xl border-gray-200 bg-white font-semibold text-gray-700 transition hover:border-emerald-300 hover:bg-emerald-50">
-                <FcGoogle className="text-xl" />
-                login with Google
-              </Button>
-            </div>
           </form>
 
-          {/* Redirect Link to Login */}
+          {/* Google Login Button */}
+          <div className="mt-4">
+            <Button
+              type="button"
+              onClick={handleGoogleLogin}
+              className="w-full flex items-center justify-center gap-2 rounded-xl border border-slate-700 bg-slate-950 font-semibold text-slate-200 hover:bg-slate-800 transition"
+            >
+              <FcGoogle className="text-xl" />
+              Sign in with Google
+            </Button>
+          </div>
+
+          {/* Redirect Link to Register */}
           <div className="mt-6 border-t border-slate-800/80 pt-4 text-center">
             <p className="text-xs text-slate-400">
-              have an account?{" "}
+              Don&apos;t have an account?{" "}
               <Link
                 href="/sign-up"
                 className="font-semibold text-cyan-400 hover:underline"
               >
-                RegisterPage
+                Register Here
               </Link>
             </p>
           </div>

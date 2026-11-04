@@ -10,7 +10,7 @@ import {
   Mail,
   PlusCircle,
   Settings,
-  SunDim,
+  Menu,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -38,7 +38,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-0 z-50  backdrop-blur-md p-2">
+    <nav className="sticky top-0 z-50 backdrop-blur-md p-2 border-b border-slate-800/50 bg-background/80">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
         {/* App Logo */}
         <Link href="/" className="flex items-center gap-3 group">
@@ -58,36 +58,72 @@ export default function Navbar() {
               />
             </svg>
           </div>
-          <span className="tracking-wide ">
-            <p className="text-xl">
+          <span className="tracking-wide">
+            <p className="text-xl font-bold">
               Good<span className="text-cyan-400">Gather</span>
             </p>
           </span>
         </Link>
 
-        {/* Upcoming Events Link */}
-        <div className="lg:flex items-center gap-4">
+        {/* Desktop Links (Hidden on small devices, shown on lg+) */}
+        <div className="hidden lg:flex items-center gap-6">
           <Link
-          href="/allEvents"
-          className="text-sm font-medium text-slate-300 hover:text-orange-400 transition-colors flex items-center gap-1.5"
-        >
-          <Calendar className="h-4 w-4" /> Upcoming Events
-        </Link>
-        <Link className="text-sm font-medium text-slate-300 hover:text-orange-400 transition-colors flex items-center gap-1.5" href={'/Events'}>
-          <CirclePlus size={12} /> Create Event
-        </Link>
+            href="/allEvents"
+            className="text-sm font-medium text-slate-300 hover:text-orange-400 transition-colors flex items-center gap-1.5"
+          >
+            <Calendar className="h-4 w-4" /> Upcoming Events
+          </Link>
+          <Link
+            href="/Events"
+            className="text-sm font-medium text-slate-300 hover:text-orange-400 transition-colors flex items-center gap-1.5"
+          >
+            <CirclePlus className="h-4 w-4" /> Create Event
+          </Link>
         </div>
 
         {/* Navigation / Auth Section */}
-
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4">
           <div className="cursor-pointer">
-            <ThemeToggle/>
+            <ThemeToggle />
           </div>
+
+          {/* Small Device Dropdown Menu for Links */}
+          <div className="lg:hidden">
+            <Popover>
+              <PopoverTrigger>
+                <Button variant="outline" size="icon" className="rounded-xl border-slate-800 bg-slate-900 text-slate-200">
+                  <Menu className="h-5 w-5" />
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent
+                align="end"
+                className="w-52 rounded-2xl border border-slate-800 bg-slate-950 p-2 text-slate-100 shadow-2xl backdrop-blur-md"
+              >
+                <div className="space-y-1">
+                  <Link
+                    href="/allEvents"
+                    className="flex items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-semibold text-slate-300 transition-all hover:bg-slate-900 hover:text-cyan-400"
+                  >
+                    <Calendar className="h-4 w-4 text-cyan-400" />
+                    <span>Upcoming Events</span>
+                  </Link>
+                  <Link
+                    href="/Events"
+                    className="flex items-center gap-2.5 rounded-xl px-3 py-2 text-xs font-semibold text-slate-300 transition-all hover:bg-slate-900 hover:text-cyan-400"
+                  >
+                    <CirclePlus className="h-4 w-4 text-cyan-400" />
+                    <span>Create Event</span>
+                  </Link>
+                </div>
+              </PopoverContent>
+            </Popover>
+          </div>
+
+          {/* User Profile / Auth */}
           {user ? (
             <Popover>
-              {/* Trigger Button with Avatar */}
-              <PopoverTrigger>
+             
+              <PopoverTrigger >
                 <button className="rounded-full outline-none ring-offset-background transition-transform hover:scale-105 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
                   <Avatar className="h-10 w-10 border border-red-700/50 shadow-sm">
                     <AvatarImage
@@ -125,10 +161,9 @@ export default function Navbar() {
                   </div>
                 </div>
 
-                {/* Divider */}
                 <div className="my-3 h-[1px] bg-slate-800/80" />
 
-                {/* Navigation Links List */}
+                
                 <div className="space-y-1">
                   <Link
                     href="/Events"
@@ -155,10 +190,10 @@ export default function Navbar() {
                   </Link>
                 </div>
 
-                {/* Divider */}
+              
                 <div className="my-3 h-[1px] bg-slate-800/80" />
 
-                {/* Signout Action */}
+               
                 <Button
                   onClick={handleSignout}
                   variant="destructive"
@@ -168,7 +203,6 @@ export default function Navbar() {
                   <span>Sign Out</span>
                 </Button>
               </PopoverContent>
-
               <Button
                   onClick={handleSignout}
                   variant="destructive"
@@ -178,7 +212,7 @@ export default function Navbar() {
                   <span>Sign Out</span>
                 </Button>
             </Popover>
-              
+            
           ) : (
             <Button className="bg-cyan-500 px-4 text-slate-950 font-semibold hover:bg-cyan-200">
               <Link href="/login">Login</Link>
